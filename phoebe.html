@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phoebe's House Lookbook - Print Version</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            beige: '#F5F5F0',
+                            dark: '#2C2C2C',
+                            gold: '#C5A059',
+                            wood: '#8B5A2B',
+                            stone: '#9CA3AF'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    spacing: {
+                        'a4-w': '297mm',
+                        'a4-h': '210mm',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Print settings */
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                background: white;
+            }
+            .no-print {
+                display: none;
+            }
+            .page {
+                break-after: page;
+                page-break-after: always;
+                border: none !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+            }
+        }
+
+        /* Screen preview settings */
+        body {
+            background-color: #525252;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .page {
+            width: 297mm;
+            height: 210mm;
+            background: white;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            /* Flex layout for content inside pages */
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .page-content {
+            flex: 1;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10mm;
+            font-size: 9pt;
+            color: #888;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .page-number.left { left: 15mm; }
+        .page-number.right { right: 15mm; }
+
+        /* Helpers */
+        .bleed-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Instructions Bar (Visible only on screen) -->
+    <div class="no-print fixed top-0 left-0 w-full bg-brand-dark text-white p-4 z-50 flex justify-between items-center shadow-lg opacity-90 hover:opacity-100 transition">
+        <div>
+            <span class="font-bold text-brand-gold">CHẾ ĐỘ XEM TRƯỚC IN ẤN (A4 LANDSCAPE)</span>
+            <span class="ml-4 text-sm text-gray-300">Cuộn xuống để xem từng trang.</span>
+        </div>
+        <button onclick="window.print()" class="bg-brand-gold text-brand-dark px-6 py-2 rounded font-bold hover:bg-white transition">
+            <i class="fas fa-print mr-2"></i> Lưu PDF / In
+        </button>
+    </div>
+    <div class="no-print h-16"></div> <!-- Spacer -->
+
+    <!-- PAGE 1: FRONT COVER -->
+    <div class="page bg-brand-dark text-white">
+        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" class="bleed-img opacity-60" alt="Cover">
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center p-12 border-[1px] border-white/20 m-6">
+            <p class="text-sm uppercase tracking-[0.4em] mb-8">Architectural Lookbook</p>
+            <h1 class="font-serif text-8xl font-light mb-8 tracking-wide">PHOEBE'S HOUSE</h1>
+            <div class="w-32 h-px bg-brand-gold mx-auto mb-8"></div>
+            <p class="font-light italic text-2xl opacity-90 max-w-2xl leading-relaxed">"Chạm vào bình yên – Nơi gác lại những ồn ào phố thị"</p>
+            <div class="absolute bottom-10">
+                <p class="text-xs uppercase tracking-widest text-brand-gold">Thiết kế & Thi công bởi Cát Việt Architecture</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: LEFT - MOOD IMAGE -->
+    <div class="page">
+        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" class="bleed-img filter brightness-90" alt="Family Mood">
+        <div class="absolute bottom-12 left-12 text-white max-w-md">
+            <p class="font-serif italic text-3xl leading-normal">"Nhà là nơi bão dừng sau cánh cửa."</p>
+        </div>
+        <div class="page-number left">02</div>
+    </div>
+
+    <!-- PAGE 3: RIGHT - EDITOR'S LETTER -->
+    <div class="page bg-brand-beige">
+        <div class="h-full flex flex-col justify-center px-24 py-16">
+            <div class="flex items-center mb-12">
+                <div class="w-16 h-px bg-brand-dark mr-4"></div>
+                <span class="text-sm uppercase tracking-widest font-bold text-brand-gold">Lời Ngỏ</span>
+            </div>
+            
+            <h2 class="font-serif text-5xl mb-10 text-brand-dark italic">Gửi Gia đình bé Phoebe,</h2>
+            
+            <div class="prose prose-xl text-gray-600 font-light leading-relaxed text-justify">
+                <p class="mb-6">
+                    Một ngôi nhà đẹp không chỉ để ngắm, mà là để "thở" và để tận hưởng. Khi bắt tay vào thiết kế <strong>Phoebe's House</strong> tại KDC Nam Long 2, chúng tôi không chỉ xây dựng những bức tường, mà muốn kiến tạo một chốn về đúng nghĩa.
+                </p>
+                <p>
+                    Cuốn tạp chí này là món quà nhỏ Cát Việt gửi tặng anh chị, lưu giữ lại hành trình chúng ta cùng nhau biến những bản vẽ thành hiện thực. Cảm ơn anh chị đã tin tưởng để chúng tôi được đồng hành.
+                </p>
+            </div>
+
+            <div class="mt-16">
+                <img src="https://dummyimage.com/150x60/F5F5F0/2c2c2c&text=Signature" alt="Signature" class="opacity-60 h-12 -ml-2">
+                <p class="text-sm font-bold mt-2 text-brand-dark uppercase tracking-widest">KTS Trưởng</p>
+            </div>
+        </div>
+        <div class="page-number right">03</div>
+    </div>
+
+    <!-- PAGE 4: LEFT - CONCEPT (SKETCH) -->
+    <div class="page bg-white">
+        <div class="grid grid-cols-2 h-full">
+            <div class="p-16 flex flex-col justify-center">
+                <span class="text-brand-gold uppercase tracking-widest text-xs font-bold mb-4">The Concept</span>
+                <h2 class="font-serif text-5xl mb-8 text-brand-dark">Cảm Hứng Từ<br>Thiên Nhiên</h2>
+                <p class="text-gray-600 font-light leading-relaxed mb-8">
+                    Chúng tôi bắt đầu với ý tưởng về sự cân bằng. Giữa hiện đại và mộc mạc. Giữa đặc và rỗng. Giữa con người và thiên nhiên.
+                </p>
+                <div class="bg-brand-beige p-6 border-l-4 border-brand-gold">
+                    <p class="italic text-brand-dark text-sm">"Mỗi nét vẽ phác thảo đều hướng tới việc tối đa hóa ánh sáng tự nhiên và luân chuyển không khí."</p>
+                </div>
+            </div>
+            <div class="relative h-full border-l border-gray-100">
+                <img src="https://images.unsplash.com/photo-1629196914375-f7e48f477b6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="absolute inset-0 w-full h-full object-cover grayscale opacity-90" alt="Sketch">
+                <div class="absolute inset-0 bg-brand-dark mix-blend-color opacity-20"></div>
+            </div>
+        </div>
+        <div class="page-number left">04</div>
+    </div>
+
+    <!-- PAGE 5: RIGHT - MATERIALS MOODBOARD -->
+    <div class="page bg-white">
+        <div class="h-full grid grid-cols-3 gap-1 p-12">
+            <div class="col-span-2 row-span-2 relative overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover" alt="Interior Mood">
+            </div>
+            <div class="col-span-1 bg-brand-beige p-6 flex flex-col justify-center">
+                <h3 class="font-serif text-2xl mb-2">Gỗ Sồi</h3>
+                <p class="text-xs text-gray-500">Tự nhiên, ấm áp</p>
+                <div class="w-full h-24 mt-4 bg-brand-wood rounded-sm"></div>
+            </div>
+            <div class="col-span-1 bg-gray-100 p-6 flex flex-col justify-center">
+                <h3 class="font-serif text-2xl mb-2">Đá Xám</h3>
+                <p class="text-xs text-gray-500">Mạnh mẽ, điểm nhấn</p>
+                <div class="w-full h-24 mt-4 bg-brand-stone rounded-sm"></div>
+            </div>
+        </div>
+        <div class="page-number right">05</div>
+    </div>
+
+    <!-- PAGE 6: LEFT - THE JOURNEY (BEFORE) -->
+    <div class="page bg-brand-dark text-white">
+        <div class="h-full flex">
+            <div class="w-1/3 p-12 flex flex-col justify-center border-r border-gray-700">
+                <span class="text-brand-gold uppercase tracking-widest text-xs font-bold mb-4">The Journey</span>
+                <h2 class="font-serif text-4xl mb-6">Hành Trình<br>Lột Xác</h2>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Từ những viên gạch thô mộc đầu tiên... Quá trình thi công là minh chứng cho sự tỉ mỉ và tâm huyết.
+                </p>
+            </div>
+            <div class="w-2/3 grid grid-rows-2">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="w-full h-full object-cover grayscale opacity-70" alt="Construction 1">
+                    <span class="absolute bottom-4 left-4 text-xs bg-black px-2 py-1">Tháng 03/2024</span>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="w-full h-full object-cover grayscale opacity-70" alt="Construction 2">
+                    <span class="absolute bottom-4 left-4 text-xs bg-black px-2 py-1">Tháng 06/2024</span>
+                </div>
+            </div>
+        </div>
+        <div class="page-number left text-gray-600">06</div>
+    </div>
+
+    <!-- PAGE 7: RIGHT - THE JOURNEY (AFTER - FULL BLEED) -->
+    <div class="page">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" class="bleed-img" alt="Finished Facade">
+        <div class="absolute bottom-0 right-0 bg-brand-gold p-6 px-10">
+            <span class="font-serif text-2xl font-bold text-brand-dark">HOÀN THIỆN</span>
+        </div>
+        <div class="page-number right text-white shadow-black drop-shadow-md">07</div>
+    </div>
+
+    <!-- PAGE 8: LEFT - LIVING ROOM -->
+    <div class="page bg-brand-beige">
+        <div class="h-full flex flex-col p-12 pr-0">
+            <div class="w-full h-4/5 relative overflow-hidden rounded-l-md shadow-xl">
+                <img src="https://images.unsplash.com/photo-1600210491892-db9a7df905ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=80" class="w-full h-full object-cover" alt="Living Room">
+            </div>
+            <div class="h-1/5 flex items-center pt-6 pr-12">
+                <div>
+                    <h2 class="font-serif text-4xl text-brand-dark">Không Gian Mở</h2>
+                    <p class="text-sm text-gray-500 mt-2">Phòng khách liền bếp - Xóa nhòa ranh giới.</p>
+                </div>
+            </div>
+        </div>
+        <div class="page-number left">08</div>
+    </div>
+
+    <!-- PAGE 9: RIGHT - DINING & DETAILS -->
+    <div class="page bg-white">
+        <div class="h-full grid grid-cols-2 p-12 pl-0 gap-8">
+            <div class="flex flex-col justify-center px-12">
+                <h3 class="font-serif text-3xl mb-6 text-brand-wood">Gắn Kết Yêu Thương</h3>
+                <p class="text-gray-600 font-light leading-relaxed mb-8 text-justify">
+                    Điểm nhấn là chiếc bàn ăn nguyên tấm sang trọng – nơi chứng kiến những bữa cơm rộn rã tiếng cười và gắn kết tình thân của gia đình. Ánh sáng vàng dịu nhẹ từ đèn thả trần tạo nên không khí ấm cúng mỗi tối.
+                </p>
+                <div class="h-px w-20 bg-brand-gold"></div>
+            </div>
+            <div class="relative h-full overflow-hidden rounded-r-md">
+                <img src="https://images.unsplash.com/photo-1615529328331-f8e2642d7fbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" class="w-full h-full object-cover" alt="Dining Detail">
+            </div>
+        </div>
+        <div class="page-number right">09</div>
+    </div>
+
+    <!-- PAGE 10: LEFT - GREEN OASIS -->
+    <div class="page">
+        <img src="https://images.unsplash.com/photo-1599394017773-fbc63c9f85d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" class="bleed-img" alt="Green Space">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+        <div class="absolute top-1/2 left-16 transform -translate-y-1/2 text-white max-w-sm">
+            <h2 class="font-serif text-6xl mb-6">Khoảng<br>Thở Xanh</h2>
+            <p class="font-light text-lg opacity-90">
+                Những góc vườn nhỏ tại ban công và giếng trời không chỉ đón nắng, đón gió mà còn nuôi dưỡng tâm hồn.
+            </p>
+        </div>
+        <div class="page-number left text-white">10</div>
+    </div>
+
+    <!-- PAGE 11: RIGHT - NATURE DETAILS -->
+    <div class="page bg-white">
+        <div class="h-full grid grid-cols-2 gap-8 p-16">
+            <div class="relative overflow-hidden rounded-sm shadow-lg">
+                <img src="https://images.unsplash.com/photo-1463936575829-25148e1db1b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Leaf Detail">
+            </div>
+            <div class="flex flex-col justify-center">
+                 <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-64 object-cover rounded-sm shadow-lg mb-6" alt="Light and Shadow">
+                 <p class="font-serif italic text-2xl text-brand-dark text-center">"Nắng là lớp trang điểm đẹp nhất của kiến trúc."</p>
+            </div>
+        </div>
+        <div class="page-number right">11</div>
+    </div>
+
+    <!-- PAGE 12: LEFT - MASTER BEDROOM -->
+    <div class="page bg-brand-beige">
+        <div class="h-full flex items-center p-12">
+            <div class="w-1/3 pr-8">
+                <span class="text-brand-gold uppercase tracking-widest text-xs font-bold block mb-4">Private Retreat</span>
+                <h2 class="font-serif text-4xl mb-6 text-brand-dark">Master Bedroom</h2>
+                <p class="text-gray-600 font-light leading-relaxed text-sm">
+                    Sự kết hợp tinh tế giữa vách đầu giường đá xám mạnh mẽ và hệ tủ mây tre đan mềm mại, tạo nên một không gian nghỉ ngơi thư thái tuyệt đối.
+                </p>
+            </div>
+            <div class="w-2/3 h-full relative overflow-hidden rounded-sm shadow-md">
+                <img src="https://images.unsplash.com/photo-1616594039964-40891a909d93?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" class="w-full h-full object-cover" alt="Master Bedroom">
+            </div>
+        </div>
+        <div class="page-number left">12</div>
+    </div>
+
+    <!-- PAGE 13: RIGHT - PHOEBE'S ROOM -->
+    <div class="page bg-white">
+        <div class="h-full flex flex-row-reverse items-center p-12">
+            <div class="w-1/3 pl-8 text-right">
+                <span class="text-brand-gold uppercase tracking-widest text-xs font-bold block mb-4">Phoebe's Room</span>
+                <h2 class="font-serif text-4xl mb-6 text-brand-dark">Thế Giới Của Bé</h2>
+                <p class="text-gray-600 font-light leading-relaxed text-sm">
+                    Nơi ươm mầm những giấc mơ. Màu sắc tươi sáng, nhẹ nhàng nhưng vẫn giữ được sự hài hòa với ngôn ngữ thiết kế chung.
+                </p>
+            </div>
+            <div class="w-2/3 h-full relative overflow-hidden rounded-sm shadow-md">
+                <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" class="w-full h-full object-cover" alt="Kid Room">
+            </div>
+        </div>
+        <div class="page-number right">13</div>
+    </div>
+
+    <!-- PAGE 14: LEFT - FLOOR PLAN -->
+    <div class="page bg-white">
+        <div class="h-full p-16 flex flex-col items-center justify-center border-[12px] border-brand-beige m-8">
+            <h2 class="font-serif text-3xl mb-8">Mặt Bằng Bố Trí</h2>
+            <div class="w-full h-full bg-gray-50 flex items-center justify-center border border-gray-200">
+                <div class="text-center text-gray-400">
+                    <i class="far fa-map text-5xl mb-4"></i>
+                    <p class="font-sans text-sm">PLACEHOLDER FOR 2D FLOOR PLAN IMAGE</p>
+                    <p class="text-xs mt-2">(Vui lòng chèn ảnh bản vẽ kỹ thuật tại đây)</p>
+                </div>
+            </div>
+        </div>
+        <div class="page-number left">14</div>
+    </div>
+
+    <!-- PAGE 15: RIGHT - CONTACT -->
+    <div class="page bg-brand-dark text-white">
+        <div class="h-full flex items-center justify-center">
+            <div class="text-center">
+                <div class="text-3xl font-serif font-bold tracking-widest mb-12">CÁT VIỆT</div>
+                
+                <div class="grid grid-cols-1 gap-6 text-sm font-light mb-12">
+                    <p><i class="fas fa-phone-alt mr-3 text-brand-gold"></i> 0909 xxx xxx</p>
+                    <p><i class="fas fa-envelope mr-3 text-brand-gold"></i> contact@catviet.com</p>
+                    <p><i class="fas fa-globe mr-3 text-brand-gold"></i> www.catviet.vn</p>
+                </div>
+
+                <div class="w-16 h-px bg-gray-600 mx-auto mb-8"></div>
+                
+                <p class="text-xs text-gray-500 uppercase tracking-widest">Thank you for trusting us</p>
+            </div>
+        </div>
+        <div class="page-number right text-gray-600">15</div>
+    </div>
+
+    <!-- PAGE 16: BACK COVER -->
+    <div class="page bg-brand-beige">
+        <div class="h-full flex flex-col items-center justify-center p-12 relative">
+            <!-- Center Logo -->
+            <div class="text-center z-10">
+                <div class="text-6xl font-serif font-bold text-brand-dark tracking-widest mb-4">CV</div>
+                <p class="text-sm uppercase tracking-[0.3em] text-brand-gold">Architecture</p>
+            </div>
+
+            <!-- Bottom Text -->
+            <div class="absolute bottom-12 text-center w-full">
+                <p class="text-xs text-gray-400 uppercase tracking-widest mb-2">Phoebe's House Project</p>
+                <p class="text-[10px] text-gray-300">© 2024 All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
