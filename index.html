@@ -3,390 +3,919 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phoebe's House Lookbook - Print Version</title>
+    <title>Company Profile - Bệnh Viện Sài Gòn TG</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <!-- Font Awesome (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Config Theme Colors - BLUE THEME KEPT -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         brand: {
-                            beige: '#F5F5F0',
-                            dark: '#2C2C2C',
-                            gold: '#C5A059',
-                            wood: '#8B5A2B',
-                            stone: '#9CA3AF'
+                            main: '#0056b3',   // Primary Blue
+                            light: '#4dabf7',  // Light Blue
+                            dark: '#003366',   // Navy Blue
+                            accent: '#e63946', // Red Accent
+                            yellow: '#ffcc00', // Gold
+                            bg: '#f0f7ff',     // Alice Blue
+                            tech: '#0f172a',   // Dark Slate for Tech/Equipment page
                         }
                     },
                     fontFamily: {
-                        serif: ['"Cormorant Garamond"', 'serif'],
-                        sans: ['"Montserrat"', 'sans-serif'],
+                        sans: ['Open Sans', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
                     },
-                    spacing: {
-                        'a4-w': '297mm',
-                        'a4-h': '210mm',
+                    boxShadow: {
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'glow': '0 0 15px rgba(0, 86, 179, 0.3)',
+                        'neon': '0 0 10px rgba(77, 171, 247, 0.5), 0 0 20px rgba(77, 171, 247, 0.3)',
                     }
                 }
             }
         }
     </script>
+
     <style>
-        /* Print settings */
-        @page {
-            size: A4 landscape;
-            margin: 0;
-        }
+        /* PRINT SETTINGS */
         @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
             body {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-                background: white;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .page-break {
+                break-after: page;
+                page-break-after: always;
             }
             .no-print {
                 display: none;
             }
-            .page {
-                break-after: page;
-                page-break-after: always;
-                border: none !important;
+            .shadow-xl, .shadow-lg, .shadow-card, .shadow-neon {
                 box-shadow: none !important;
-                margin: 0 !important;
+                border: 1px solid #e5e7eb;
             }
         }
 
-        /* Screen preview settings */
-        body {
-            background-color: #525252;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .page {
-            width: 297mm;
-            height: 210mm;
-            background: white;
-            margin-bottom: 20px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-            /* Flex layout for content inside pages */
-            display: flex;
-            flex-direction: column;
+        /* SCREEN PREVIEW SETTINGS */
+        html {
+            overflow-y: scroll; /* Luôn giữ thanh cuộn dọc để tránh layout bị giật khi "lật" trang */
         }
         
-        .page-content {
-            flex: 1;
+        body {
+            background-color: #525252;
+            font-family: 'Open Sans', sans-serif;
+            overflow-x: hidden; /* CẮT BỎ thanh trượt ngang thừa */
+            width: 100%;
+        }
+
+        .a4-page {
+            width: 210mm;
+            height: 296mm;
+            background: white;
+            margin: 20px auto;
             position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            /* Thêm transition nhẹ để mượt hơn khi cuộn */
+            transition: transform 0.3s ease; 
         }
 
-        .page-number {
-            position: absolute;
-            bottom: 10mm;
-            font-size: 9pt;
-            color: #888;
-            font-family: 'Montserrat', sans-serif;
+        /* Utility for slanted backgrounds */
+        .clip-path-slant {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
         }
-        .page-number.left { left: 15mm; }
-        .page-number.right { right: 15mm; }
-
-        /* Helpers */
-        .bleed-img {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
+        .clip-path-slant-reverse {
+            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+        }
+        .clip-path-diagonal {
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
         }
     </style>
 </head>
 <body>
 
-    <!-- Instructions Bar (Visible only on screen) -->
-    <div class="no-print fixed top-0 left-0 w-full bg-brand-dark text-white p-4 z-50 flex justify-between items-center shadow-lg opacity-90 hover:opacity-100 transition">
+    <!-- Control Bar -->
+    <div class="no-print fixed top-0 left-0 w-full bg-gray-900 text-white p-4 z-50 flex justify-between items-center shadow-lg">
         <div>
-            <span class="font-bold text-brand-gold">CHẾ ĐỘ XEM TRƯỚC IN ẤN (A4 LANDSCAPE)</span>
-            <span class="ml-4 text-sm text-gray-300">Cuộn xuống để xem từng trang.</span>
+            <h1 class="font-bold text-lg">Hồ Sơ Năng Lực - Bệnh Viện Sài Gòn TG</h1>
+            <p class="text-sm text-gray-400">Cập nhật: Tách Trang Thiết Bị & Làm Nổi Bật</p>
         </div>
-        <button onclick="window.print()" class="bg-brand-gold text-brand-dark px-6 py-2 rounded font-bold hover:bg-white transition">
-            <i class="fas fa-print mr-2"></i> Lưu PDF / In
+        <button onclick="window.print()" class="bg-brand-main hover:bg-brand-light text-white font-bold py-2 px-6 rounded transition duration-300 flex items-center gap-2">
+            <i class="fas fa-print"></i> In / Lưu PDF
         </button>
     </div>
-    <div class="no-print h-16"></div> <!-- Spacer -->
+    <div class="no-print h-20"></div>
 
-    <!-- PAGE 1: FRONT COVER -->
-    <div class="page bg-brand-dark text-white">
-        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" class="bleed-img opacity-60" alt="Cover">
-        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center p-12 border-[1px] border-white/20 m-6">
-            <p class="text-sm uppercase tracking-[0.4em] mb-8">Architectural Lookbook</p>
-            <h1 class="font-serif text-8xl font-light mb-8 tracking-wide">PHOEBE'S HOUSE</h1>
-            <div class="w-32 h-px bg-brand-gold mx-auto mb-8"></div>
-            <p class="font-light italic text-2xl opacity-90 max-w-2xl leading-relaxed">"Chạm vào bình yên – Nơi gác lại những ồn ào phố thị"</p>
-            <div class="absolute bottom-10">
-                <p class="text-xs uppercase tracking-widest text-brand-gold">Thiết kế & Thi công bởi Cát Việt Architecture</p>
-            </div>
-        </div>
-    </div>
+    <!-- ================= PAGE 1: COVER ================= -->
+    <div class="a4-page page-break relative bg-white">
+        <!-- Background Decor -->
+        <div class="absolute top-0 right-0 w-[85%] h-[75%] bg-gradient-to-bl from-brand-main to-brand-light rounded-bl-[250px] z-0 opacity-10"></div>
+        <div class="absolute bottom-0 left-0 w-full h-[40%] bg-brand-main z-0 clip-path-slant"></div>
+        
+        <div class="absolute inset-0 opacity-5 pointer-events-none z-0" style="background-image: radial-gradient(#0056b3 1px, transparent 1px); background-size: 20px 20px;"></div>
 
-    <!-- PAGE 2: LEFT - MOOD IMAGE -->
-    <div class="page">
-        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" class="bleed-img filter brightness-90" alt="Family Mood">
-        <div class="absolute bottom-12 left-12 text-white max-w-md">
-            <p class="font-serif italic text-3xl leading-normal">"Nhà là nơi bão dừng sau cánh cửa."</p>
-        </div>
-        <div class="page-number left">02</div>
-    </div>
+        <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=2070&auto=format&fit=crop" class="absolute bottom-0 left-0 w-full h-[40%] object-cover mix-blend-overlay opacity-40 z-0" alt="Hospital Bg">
 
-    <!-- PAGE 3: RIGHT - EDITOR'S LETTER -->
-    <div class="page bg-brand-beige">
-        <div class="h-full flex flex-col justify-center px-24 py-16">
-            <div class="flex items-center mb-12">
-                <div class="w-16 h-px bg-brand-dark mr-4"></div>
-                <span class="text-sm uppercase tracking-widest font-bold text-brand-gold">Lời Ngỏ</span>
-            </div>
-            
-            <h2 class="font-serif text-5xl mb-10 text-brand-dark italic">Gửi Gia đình bé Phoebe,</h2>
-            
-            <div class="prose prose-xl text-gray-600 font-light leading-relaxed text-justify">
-                <p class="mb-6">
-                    Một ngôi nhà đẹp không chỉ để ngắm, mà là để "thở" và để tận hưởng. Khi bắt tay vào thiết kế <strong>Phoebe's House</strong> tại KDC Nam Long 2, chúng tôi không chỉ xây dựng những bức tường, mà muốn kiến tạo một chốn về đúng nghĩa.
-                </p>
-                <p>
-                    Cuốn tạp chí này là món quà nhỏ Cát Việt gửi tặng anh chị, lưu giữ lại hành trình chúng ta cùng nhau biến những bản vẽ thành hiện thực. Cảm ơn anh chị đã tin tưởng để chúng tôi được đồng hành.
-                </p>
-            </div>
-
-            <div class="mt-16">
-                <img src="https://dummyimage.com/150x60/F5F5F0/2c2c2c&text=Signature" alt="Signature" class="opacity-60 h-12 -ml-2">
-                <p class="text-sm font-bold mt-2 text-brand-dark uppercase tracking-widest">KTS Trưởng</p>
-            </div>
-        </div>
-        <div class="page-number right">03</div>
-    </div>
-
-    <!-- PAGE 4: LEFT - CONCEPT (SKETCH) -->
-    <div class="page bg-white">
-        <div class="grid grid-cols-2 h-full">
-            <div class="p-16 flex flex-col justify-center">
-                <span class="text-brand-gold uppercase tracking-widest text-xs font-bold mb-4">The Concept</span>
-                <h2 class="font-serif text-5xl mb-8 text-brand-dark">Cảm Hứng Từ<br>Thiên Nhiên</h2>
-                <p class="text-gray-600 font-light leading-relaxed mb-8">
-                    Chúng tôi bắt đầu với ý tưởng về sự cân bằng. Giữa hiện đại và mộc mạc. Giữa đặc và rỗng. Giữa con người và thiên nhiên.
-                </p>
-                <div class="bg-brand-beige p-6 border-l-4 border-brand-gold">
-                    <p class="italic text-brand-dark text-sm">"Mỗi nét vẽ phác thảo đều hướng tới việc tối đa hóa ánh sáng tự nhiên và luân chuyển không khí."</p>
+        <!-- Content -->
+        <div class="relative z-10 h-full flex flex-col justify-between p-12">
+            <!-- Header Logo Area -->
+            <div class="flex justify-between items-start pt-8">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 bg-white border-2 border-brand-main rounded-lg flex items-center justify-center shadow-lg relative overflow-hidden">
+                        <div class="absolute w-full h-2 bg-brand-accent top-1/2 -translate-y-1/2"></div>
+                        <div class="absolute h-full w-2 bg-brand-accent left-1/2 -translate-x-1/2"></div>
+                    </div>
+                    <div>
+                        <h2 class="text-brand-dark font-display font-black text-3xl leading-none tracking-tight">SÀI GÒN TG</h2>
+                        <p class="text-brand-accent text-sm font-bold tracking-[0.3em] uppercase">Hospital</p>
+                    </div>
+                </div>
+                <div class="text-right border-r-4 border-brand-accent pr-4">
+                    <p class="text-brand-main font-bold text-sm">MST: 1101786247</p>
+                    <p class="text-gray-500 text-xs">www.benhviensaigontg.com.vn</p>
                 </div>
             </div>
-            <div class="relative h-full border-l border-gray-100">
-                <img src="https://images.unsplash.com/photo-1629196914375-f7e48f477b6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="absolute inset-0 w-full h-full object-cover grayscale opacity-90" alt="Sketch">
-                <div class="absolute inset-0 bg-brand-dark mix-blend-color opacity-20"></div>
-            </div>
-        </div>
-        <div class="page-number left">04</div>
-    </div>
 
-    <!-- PAGE 5: RIGHT - MATERIALS MOODBOARD -->
-    <div class="page bg-white">
-        <div class="h-full grid grid-cols-3 gap-1 p-12">
-            <div class="col-span-2 row-span-2 relative overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover" alt="Interior Mood">
+            <!-- Title Area -->
+            <div class="my-auto pl-4 border-l-8 border-brand-accent">
+                <p class="text-brand-main font-bold text-xl mb-2 uppercase tracking-widest">Hồ Sơ Năng Lực</p>
+                <h1 class="text-6xl font-display font-black text-brand-dark leading-tight mb-4">
+                    CÔNG TY CỔ PHẦN<br>
+                    <span class="text-brand-main">BỆNH VIỆN</span><br>
+                    SÀI GÒN TG
+                </h1>
+                <p class="text-2xl text-gray-600 font-light italic">"Người bệnh như người thân - Tận tâm phục vụ"</p>
             </div>
-            <div class="col-span-1 bg-brand-beige p-6 flex flex-col justify-center">
-                <h3 class="font-serif text-2xl mb-2">Gỗ Sồi</h3>
-                <p class="text-xs text-gray-500">Tự nhiên, ấm áp</p>
-                <div class="w-full h-24 mt-4 bg-brand-wood rounded-sm"></div>
-            </div>
-            <div class="col-span-1 bg-gray-100 p-6 flex flex-col justify-center">
-                <h3 class="font-serif text-2xl mb-2">Đá Xám</h3>
-                <p class="text-xs text-gray-500">Mạnh mẽ, điểm nhấn</p>
-                <div class="w-full h-24 mt-4 bg-brand-stone rounded-sm"></div>
-            </div>
-        </div>
-        <div class="page-number right">05</div>
-    </div>
 
-    <!-- PAGE 6: LEFT - THE JOURNEY (BEFORE) -->
-    <div class="page bg-brand-dark text-white">
-        <div class="h-full flex">
-            <div class="w-1/3 p-12 flex flex-col justify-center border-r border-gray-700">
-                <span class="text-brand-gold uppercase tracking-widest text-xs font-bold mb-4">The Journey</span>
-                <h2 class="font-serif text-4xl mb-6">Hành Trình<br>Lột Xác</h2>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    Từ những viên gạch thô mộc đầu tiên... Quá trình thi công là minh chứng cho sự tỉ mỉ và tâm huyết.
-                </p>
-            </div>
-            <div class="w-2/3 grid grid-rows-2">
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="w-full h-full object-cover grayscale opacity-70" alt="Construction 1">
-                    <span class="absolute bottom-4 left-4 text-xs bg-black px-2 py-1">Tháng 03/2024</span>
-                </div>
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="w-full h-full object-cover grayscale opacity-70" alt="Construction 2">
-                    <span class="absolute bottom-4 left-4 text-xs bg-black px-2 py-1">Tháng 06/2024</span>
+            <!-- Footer Area -->
+            <div class="text-white pb-8">
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-map-marker-alt text-brand-accent bg-white w-6 h-6 flex items-center justify-center rounded-full text-xs"></i>
+                            <p class="font-bold text-blue-100 uppercase text-sm">Địa chỉ</p>
+                        </div>
+                        <p class="font-medium pl-8">Ấp Mới 2, Mỹ Hạnh Nam,<br>Đức Hòa, Long An</p>
+                    </div>
+                    <div class="text-right">
+                        <div class="flex items-center gap-2 justify-end mb-2">
+                             <p class="font-bold text-blue-100 uppercase text-sm">Liên hệ</p>
+                             <i class="fas fa-phone text-brand-accent bg-white w-6 h-6 flex items-center justify-center rounded-full text-xs"></i>
+                        </div>
+                        <p class="font-medium">Hotline: 098 9698 115<br>benhviensaigontg@gmail.com</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="page-number left text-gray-600">06</div>
     </div>
 
-    <!-- PAGE 7: RIGHT - THE JOURNEY (AFTER - FULL BLEED) -->
-    <div class="page">
-        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" class="bleed-img" alt="Finished Facade">
-        <div class="absolute bottom-0 right-0 bg-brand-gold p-6 px-10">
-            <span class="font-serif text-2xl font-bold text-brand-dark">HOÀN THIỆN</span>
+    <!-- ================= PAGE 2: CEO LETTER ================= -->
+    <div class="a4-page page-break relative bg-white p-12 flex flex-col">
+        <div class="border-b-2 border-brand-main pb-4 mb-8 flex justify-between items-end">
+            <h2 class="text-3xl font-display font-bold text-brand-dark border-l-8 border-brand-accent pl-4 leading-none">THƯ NGỎ</h2>
+            <span class="text-gray-200 font-bold text-6xl absolute right-12 top-10 z-0">01</span>
         </div>
-        <div class="page-number right text-white shadow-black drop-shadow-md">07</div>
-    </div>
 
-    <!-- PAGE 8: LEFT - LIVING ROOM -->
-    <div class="page bg-brand-beige">
-        <div class="h-full flex flex-col p-12 pr-0">
-            <div class="w-full h-4/5 relative overflow-hidden rounded-l-md shadow-xl">
-                <img src="https://images.unsplash.com/photo-1600210491892-db9a7df905ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=80" class="w-full h-full object-cover" alt="Living Room">
+        <div class="flex flex-row gap-10 h-full relative z-10">
+            <!-- Image Section -->
+            <div class="w-5/12 flex flex-col h-full">
+                <div class="relative h-full w-full bg-gray-100 rounded-lg overflow-hidden shadow-card border border-gray-200 mb-4 group">
+                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1964&auto=format&fit=crop" class="object-cover w-full h-full transition duration-700 group-hover:scale-105" alt="CEO">
+                    <div class="absolute bottom-0 w-full bg-gradient-to-t from-brand-dark/90 to-transparent p-6 pt-20 text-white text-center">
+                         <h3 class="font-display font-bold text-xl uppercase tracking-wider">Doãn Văn Thủy</h3>
+                        <p class="text-brand-light font-medium text-sm mt-1">Giám Đốc Bệnh Viện</p>
+                    </div>
+                </div>
             </div>
-            <div class="h-1/5 flex items-center pt-6 pr-12">
+
+            <!-- Text Section -->
+            <div class="w-7/12 flex flex-col justify-between py-2">
                 <div>
-                    <h2 class="font-serif text-4xl text-brand-dark">Không Gian Mở</h2>
-                    <p class="text-sm text-gray-500 mt-2">Phòng khách liền bếp - Xóa nhòa ranh giới.</p>
+                    <h3 class="font-bold text-2xl text-brand-main mb-6">Kính gửi: Quý Đối tác và Khách hàng!</h3>
+                    
+                    <div class="text-gray-700 text-justify space-y-6 font-serif leading-relaxed text-base">
+                        <p>Lời đầu tiên, <span class="font-bold text-brand-dark">Công ty Cổ phần Bệnh viện Sài Gòn TG</span> xin gửi lời chào trân trọng, lời chúc sức khỏe và thành công đến Quý khách hàng.</p>
+                        <p>Tiền thân là Phòng khám Đa khoa Mỹ Hạnh (2017), trải qua hành trình phát triển không ngừng, chúng tôi tự hào vươn mình trở thành Bệnh viện Đa khoa với quy mô lớn, cơ sở hạ tầng khang trang và trang thiết bị hiện đại bậc nhất khu vực Đức Hòa, Long An.</p>
+                        <p class="bg-brand-bg p-4 border-l-4 border-brand-main text-brand-dark italic font-medium">
+                            "Tại Sài Gòn TG, chúng tôi không chỉ chữa bệnh mà còn trao gửi sự an tâm. Y đức và chất lượng chuyên môn là kim chỉ nam cho mọi hoạt động."
+                        </p>
+                        <p>Với đội ngũ Y Bác sĩ giàu kinh nghiệm từ các bệnh viện đầu ngành tại TP.HCM cùng hệ thống máy móc tiên tiến (CT Scanner, X-Quang KTS, Xét nghiệm tự động...), chúng tôi cam kết mang đến giải pháp chăm sóc sức khỏe toàn diện, hiệu quả và chi phí hợp lý nhất cho cộng đồng và doanh nghiệp.</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 border-t border-gray-100 pt-6">
+                    <p class="text-gray-700 mb-2 font-serif italic text-lg">Trân trọng cảm ơn sự tin tưởng của Quý khách!</p>
+                    <div class="mt-4 flex items-center justify-between">
+                        <div>
+                             <p class="text-xs text-gray-400 uppercase tracking-widest mb-2">Đại diện pháp luật</p>
+                            <div class="font-script text-4xl text-brand-main font-bold" style="font-family: 'Brush Script MT', cursive;">Doan Van Thuy</div>
+                        </div>
+                        <div class="opacity-50 grayscale">
+                             <!-- Stamp placeholder -->
+                             <div class="w-24 h-24 border-4 border-red-700 rounded-full flex items-center justify-center text-red-700 font-bold transform -rotate-12 text-xs text-center p-2">
+                                 CÔNG TY CP<br>BỆNH VIỆN<br>SÀI GÒN TG
+                             </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="page-number left">08</div>
     </div>
 
-    <!-- PAGE 9: RIGHT - DINING & DETAILS -->
-    <div class="page bg-white">
-        <div class="h-full grid grid-cols-2 p-12 pl-0 gap-8">
-            <div class="flex flex-col justify-center px-12">
-                <h3 class="font-serif text-3xl mb-6 text-brand-wood">Gắn Kết Yêu Thương</h3>
-                <p class="text-gray-600 font-light leading-relaxed mb-8 text-justify">
-                    Điểm nhấn là chiếc bàn ăn nguyên tấm sang trọng – nơi chứng kiến những bữa cơm rộn rã tiếng cười và gắn kết tình thân của gia đình. Ánh sáng vàng dịu nhẹ từ đèn thả trần tạo nên không khí ấm cúng mỗi tối.
+    <!-- ================= PAGE 3: ABOUT US ================= -->
+    <div class="a4-page page-break relative bg-brand-bg p-12 flex flex-col">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-bl-full shadow-lg z-0"></div>
+        
+        <div class="border-b-2 border-brand-main pb-4 mb-6 flex justify-between items-end flex-shrink-0 relative z-10">
+            <h2 class="text-3xl font-display font-bold text-brand-dark border-l-8 border-brand-accent pl-4 leading-none">VỀ CHÚNG TÔI</h2>
+            <span class="text-gray-300 font-bold text-6xl absolute right-0 top-6">02</span>
+        </div>
+
+        <!-- Top Section: Overview & Stats -->
+        <div class="grid grid-cols-2 gap-10 mb-6 flex-shrink-0 relative z-10">
+            <div class="bg-white p-6 rounded-xl shadow-card">
+                <h3 class="text-xl font-bold text-brand-main mb-3 uppercase flex items-center gap-2">
+                    <i class="fas fa-info-circle"></i> Tổng Quan
+                </h3>
+                <p class="text-gray-700 text-justify mb-4 text-sm leading-relaxed">
+                    Tọa lạc tại vị trí cửa ngõ Long An, Bệnh viện Sài Gòn TG sở hữu diện tích sàn sử dụng gần <strong>4000m²</strong>. Chúng tôi là đơn vị y tế tư nhân uy tín, được Sở Y tế cấp phép hoạt động với hơn <strong>1000 danh mục kỹ thuật</strong>, phục vụ nhu cầu khám chữa bệnh đa dạng của người dân và người lao động tại các KCN.
                 </p>
-                <div class="h-px w-20 bg-brand-gold"></div>
+                
+                <div class="grid grid-cols-2 gap-3 text-center mt-4">
+                    <div class="p-3 bg-brand-bg rounded border border-brand-light/30">
+                        <p class="text-2xl font-black text-brand-dark">20+</p>
+                        <p class="text-[10px] text-brand-main font-bold uppercase">Giường nội trú</p>
+                    </div>
+                    <div class="p-3 bg-brand-bg rounded border border-brand-light/30">
+                        <p class="text-2xl font-black text-brand-dark">50+</p>
+                        <p class="text-[10px] text-brand-main font-bold uppercase">Nhân sự Y tế</p>
+                    </div>
+                    <div class="p-3 bg-brand-bg rounded border border-brand-light/30">
+                        <p class="text-2xl font-black text-brand-dark">300+</p>
+                        <p class="text-[10px] text-brand-main font-bold uppercase">Lượt khám/ngày</p>
+                    </div>
+                    <div class="p-3 bg-brand-bg rounded border border-brand-light/30">
+                        <p class="text-2xl font-black text-brand-dark">24/7</p>
+                        <p class="text-[10px] text-brand-main font-bold uppercase">Cấp cứu</p>
+                    </div>
+                </div>
             </div>
-            <div class="relative h-full overflow-hidden rounded-r-md">
-                <img src="https://images.unsplash.com/photo-1615529328331-f8e2642d7fbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" class="w-full h-full object-cover" alt="Dining Detail">
+
+            <!-- Timeline Vertical -->
+            <div class="pl-4">
+                 <h3 class="text-xl font-bold text-brand-main mb-6 uppercase flex items-center gap-2">
+                    <i class="fas fa-history"></i> Lịch Sử Hình Thành
+                </h3>
+                <div class="relative border-l-4 border-brand-light/50 ml-2 space-y-8">
+                    <div class="relative pl-8">
+                        <div class="absolute -left-[10px] top-1 w-5 h-5 rounded-full bg-brand-accent border-4 border-white shadow-md z-10"></div>
+                        <h4 class="font-bold text-brand-dark text-lg">15/12/2017</h4>
+                        <p class="text-sm text-gray-700 bg-white p-2 rounded shadow-sm inline-block mt-1">Thành lập <span class="font-semibold">Phòng Khám Đa Khoa Mỹ Hạnh</span>.</p>
+                    </div>
+                    <div class="relative pl-8">
+                        <div class="absolute -left-[10px] top-1 w-5 h-5 rounded-full bg-brand-main border-4 border-white shadow-md z-10"></div>
+                        <h4 class="font-bold text-brand-dark text-lg">2018 - 2021</h4>
+                        <p class="text-sm text-gray-600 mt-1">Mở rộng quy mô, đầu tư hệ thống CT Scanner, Nội soi tiêu hóa, Siêu âm 4D.</p>
+                    </div>
+                    <div class="relative pl-8">
+                        <div class="absolute -left-[10px] top-1 w-5 h-5 rounded-full bg-brand-main border-4 border-white shadow-md z-10"></div>
+                        <h4 class="font-bold text-brand-dark text-lg">28/06/2022</h4>
+                        <p class="text-sm text-gray-700 bg-white p-2 rounded shadow-sm inline-block mt-1 border-l-4 border-brand-accent">Chính thức nâng cấp thành <span class="font-bold text-brand-main">BỆNH VIỆN SÀI GÒN TG</span>.</p>
+                    </div>
+                    <div class="relative pl-8">
+                        <div class="absolute -left-[10px] top-1 w-5 h-5 rounded-full bg-brand-main border-4 border-white shadow-md z-10"></div>
+                        <h4 class="font-bold text-brand-dark text-lg">Nay</h4>
+                        <p class="text-sm text-gray-600 mt-1">Trở thành đối tác y tế chiến lược của hàng trăm doanh nghiệp FDI tại Long An.</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="page-number right">09</div>
+
+        <!-- Large Image -->
+        <div class="flex-grow w-full relative rounded-xl overflow-hidden shadow-card mt-4 border-4 border-white">
+             <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2053&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Hospital Building">
+             <div class="absolute top-0 right-0 bg-brand-accent text-white py-2 px-6 rounded-bl-xl font-bold shadow-lg">
+                 Cơ Sở Vật Chất Hiện Đại
+             </div>
+             <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-brand-dark/90 to-transparent p-6">
+                 <p class="text-white font-bold text-lg">Không gian khám chữa bệnh thân thiện, tiện nghi</p>
+             </div>
+        </div>
     </div>
 
-    <!-- PAGE 10: LEFT - GREEN OASIS -->
-    <div class="page">
-        <img src="https://images.unsplash.com/photo-1599394017773-fbc63c9f85d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" class="bleed-img" alt="Green Space">
-        <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
-        <div class="absolute top-1/2 left-16 transform -translate-y-1/2 text-white max-w-sm">
-            <h2 class="font-serif text-6xl mb-6">Khoảng<br>Thở Xanh</h2>
-            <p class="font-light text-lg opacity-90">
-                Những góc vườn nhỏ tại ban công và giếng trời không chỉ đón nắng, đón gió mà còn nuôi dưỡng tâm hồn.
+    <!-- ================= PAGE 4: VISION & MISSION ================= -->
+    <div class="a4-page page-break relative bg-white flex flex-col">
+        <!-- Header -->
+        <div class="h-1/3 bg-brand-main relative overflow-hidden flex items-center justify-center clip-path-slant">
+             <img src="https://images.unsplash.com/photo-1538108149393-fbbd8189718c?q=80&w=2874&auto=format&fit=crop" class="absolute w-full h-full object-cover opacity-20" alt="Vision">
+             <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/80 to-brand-main/80"></div>
+             <h2 class="relative z-10 text-5xl font-display font-black text-white tracking-widest text-center drop-shadow-lg">
+                 GIÁ TRỊ<br>CỐT LÕI
+                 <div class="w-24 h-2 bg-brand-accent mx-auto mt-4 rounded-full"></div>
+             </h2>
+        </div>
+
+        <!-- Content Diagram -->
+        <div class="flex-grow p-12 relative flex items-center justify-center">
+            <div class="grid grid-cols-3 gap-8 w-full">
+                <!-- Mission -->
+                <div class="text-center group p-6 rounded-xl hover:bg-brand-bg transition duration-300 border border-transparent hover:border-brand-light/30">
+                    <div class="w-20 h-20 mx-auto bg-brand-main text-white rounded-full flex items-center justify-center shadow-lg mb-4 group-hover:scale-110 transition duration-300 border-4 border-white ring-4 ring-brand-bg">
+                        <i class="fas fa-bullseye text-3xl"></i>
+                    </div>
+                    <h3 class="text-brand-dark font-bold text-xl uppercase mb-2">Sứ Mệnh</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        "Sức khỏe người bệnh là sứ mệnh lương y". Cam kết mang đến dịch vụ y tế chất lượng cao, an toàn và hiệu quả cho cộng đồng.
+                    </p>
+                </div>
+
+                <!-- Core Values (Center) -->
+                <div class="text-center relative pt-10">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-brand-accent/10 rounded-full blur-2xl -z-10"></div>
+                    <div class="w-28 h-28 mx-auto bg-white border-4 border-brand-accent text-brand-accent rounded-full flex items-center justify-center shadow-2xl mb-6 z-10 relative">
+                        <i class="fas fa-heartbeat text-5xl animate-pulse"></i>
+                    </div>
+                    <h3 class="text-brand-accent font-bold text-2xl uppercase mb-2">Giá Trị</h3>
+                    <div class="space-y-1">
+                        <span class="block font-bold text-brand-dark bg-gray-100 py-1 px-3 rounded-full text-xs">Y ĐỨC</span>
+                        <span class="block font-bold text-brand-dark bg-gray-100 py-1 px-3 rounded-full text-xs">CHUYÊN NGHIỆP</span>
+                        <span class="block font-bold text-brand-dark bg-gray-100 py-1 px-3 rounded-full text-xs">TẬN TÂM</span>
+                        <span class="block font-bold text-brand-dark bg-gray-100 py-1 px-3 rounded-full text-xs">HIỆU QUẢ</span>
+                    </div>
+                </div>
+
+                <!-- Vision -->
+                <div class="text-center group p-6 rounded-xl hover:bg-brand-bg transition duration-300 border border-transparent hover:border-brand-light/30">
+                    <div class="w-20 h-20 mx-auto bg-brand-main text-white rounded-full flex items-center justify-center shadow-lg mb-4 group-hover:scale-110 transition duration-300 border-4 border-white ring-4 ring-brand-bg">
+                        <i class="fas fa-eye text-3xl"></i>
+                    </div>
+                    <h3 class="text-brand-dark font-bold text-xl uppercase mb-2">Tầm Nhìn</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Trở thành bệnh viện đa khoa tư nhân hàng đầu khu vực Long An, là địa chỉ chăm sóc sức khỏe tin cậy của mọi gia đình và doanh nghiệp.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-8 text-center bg-gray-50 border-t border-gray-200">
+            <p class="text-brand-main font-bold text-xl uppercase tracking-wider">Sài Gòn TG - Nơi gửi trọn niềm tin</p>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 5: ORG CHART & TEAM ================= -->
+    <div class="a4-page page-break relative bg-white p-12 flex flex-col">
+        <div class="border-b-2 border-brand-main pb-4 mb-6 flex justify-between items-end flex-shrink-0">
+            <h2 class="text-3xl font-display font-bold text-brand-dark border-l-8 border-brand-accent pl-4 leading-none">CƠ CẤU & NHÂN SỰ</h2>
+            <span class="text-gray-200 font-bold text-6xl absolute right-12 top-10">03</span>
+        </div>
+
+        <!-- Org Chart Tree -->
+        <div class="flex flex-col items-center w-full mt-2 mb-8 flex-shrink-0">
+            <div class="bg-brand-dark text-white font-bold px-8 py-3 rounded-lg shadow-lg mb-6 uppercase w-72 text-center border-l-4 border-brand-accent text-sm relative">
+                Hội Đồng Quản Trị
+                <div class="absolute bottom-0 left-1/2 w-0.5 h-6 bg-gray-300 -mb-6"></div>
+            </div>
+            
+            <div class="bg-brand-main text-white font-bold px-8 py-3 rounded-lg shadow-md mb-6 uppercase w-72 text-center text-sm relative">
+                Ban Giám Đốc
+                <div class="absolute bottom-0 left-1/2 w-0.5 h-6 bg-gray-300 -mb-6"></div>
+            </div>
+            
+            <div class="w-[80%] h-0.5 bg-gray-300 mb-4 relative mt-2">
+                 <div class="absolute top-0 left-0 w-0.5 h-4 bg-gray-300"></div>
+                 <div class="absolute top-0 left-1/3 w-0.5 h-4 bg-gray-300"></div>
+                 <div class="absolute top-0 left-2/3 w-0.5 h-4 bg-gray-300"></div>
+                 <div class="absolute top-0 right-0 w-0.5 h-4 bg-gray-300"></div>
+            </div>
+
+            <div class="grid grid-cols-4 gap-4 w-full mb-4">
+                <div class="flex flex-col items-center">
+                    <div class="bg-white border border-brand-main text-brand-dark font-bold p-3 rounded w-full text-center text-xs shadow-sm hover:bg-brand-main hover:text-white transition">KHỐI LÂM SÀNG<br>(Nội, Ngoại, Sản, Nhi...)</div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="bg-white border border-brand-main text-brand-dark font-bold p-3 rounded w-full text-center text-xs shadow-sm hover:bg-brand-main hover:text-white transition">CẬN LÂM SÀNG<br>(Xét nghiệm, CĐHA...)</div>
+                </div>
+                 <div class="flex flex-col items-center">
+                    <div class="bg-white border border-brand-main text-brand-dark font-bold p-3 rounded w-full text-center text-xs shadow-sm hover:bg-brand-main hover:text-white transition">PHÒNG CHỨC NĂNG<br>(KHTH, Tổ chức...)</div>
+                </div>
+                 <div class="flex flex-col items-center">
+                    <div class="bg-white border border-brand-main text-brand-dark font-bold p-3 rounded w-full text-center text-xs shadow-sm hover:bg-brand-main hover:text-white transition">DỊCH VỤ<br>(CSKH, Marketing...)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: Doctor Faces -->
+        <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-1 bg-brand-accent"></div>
+            <h3 class="text-xl font-bold text-brand-main uppercase">Đội Ngũ Chuyên Môn</h3>
+        </div>
+        
+        <div class="grid grid-cols-4 gap-6 mb-6 flex-shrink-0">
+            <!-- Doctor 1 -->
+            <div class="text-center group">
+                <div class="w-24 h-24 mx-auto rounded-full overflow-hidden mb-2 shadow-md border-2 border-brand-light p-1">
+                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover rounded-full group-hover:scale-110 transition duration-500" alt="Dr">
+                </div>
+                <p class="font-bold text-brand-dark text-sm">BS.CKI Phạm Xuân Bốn</p>
+                <p class="text-[10px] text-gray-500 uppercase font-bold">Khoa Ngoại</p>
+            </div>
+             <!-- Doctor 2 -->
+             <div class="text-center group">
+                <div class="w-24 h-24 mx-auto rounded-full overflow-hidden mb-2 shadow-md border-2 border-brand-light p-1">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover rounded-full group-hover:scale-110 transition duration-500" alt="Dr">
+                </div>
+                <p class="font-bold text-brand-dark text-sm">BS. Nguyễn Văn Thật</p>
+                <p class="text-[10px] text-gray-500 uppercase font-bold">Khoa Nội</p>
+            </div>
+             <!-- Doctor 3 -->
+             <div class="text-center group">
+                <div class="w-24 h-24 mx-auto rounded-full overflow-hidden mb-2 shadow-md border-2 border-brand-light p-1">
+                    <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=1974&auto=format&fit=crop" class="w-full h-full object-cover rounded-full group-hover:scale-110 transition duration-500" alt="Dr">
+                </div>
+                <p class="font-bold text-brand-dark text-sm">BS. Trần Ngọc Sơn</p>
+                <p class="text-[10px] text-gray-500 uppercase font-bold">Sản Phụ Khoa</p>
+            </div>
+             <!-- Doctor 4 -->
+             <div class="text-center group">
+                <div class="w-24 h-24 mx-auto rounded-full overflow-hidden mb-2 shadow-md border-2 border-brand-light p-1">
+                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1964&auto=format&fit=crop" class="w-full h-full object-cover rounded-full group-hover:scale-110 transition duration-500" alt="Dr">
+                </div>
+                <p class="font-bold text-brand-dark text-sm">BS. Nguyễn Thị Nhung</p>
+                <p class="text-[10px] text-gray-500 uppercase font-bold">Da Liễu</p>
+            </div>
+        </div>
+
+        <!-- Team Photo -->
+        <div class="flex-grow w-full bg-gray-200 rounded-lg overflow-hidden relative shadow-inner">
+             <img src="https://images.unsplash.com/photo-1631217868264-e5b9099a5804?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Medical Team">
+             <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-brand-dark to-transparent p-6">
+                 <p class="text-white font-bold text-center text-xl">"Đội ngũ Y Bác sĩ Tận tâm - Chuyên nghiệp"</p>
+             </div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 6: FULL SERVICES LIST (HIGHLIGHTED) ================= -->
+    <div class="a4-page page-break relative bg-gradient-to-br from-brand-main to-brand-dark p-12 flex flex-col text-white">
+        <!-- Background Overlay -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
+        
+        <div class="relative z-10 border-b-2 border-white/50 pb-4 mb-6 flex justify-between items-end flex-shrink-0">
+            <h2 class="text-4xl font-display font-black text-white border-l-8 border-brand-accent pl-4 leading-none drop-shadow-lg tracking-wide">
+                DANH MỤC<br>DỊCH VỤ
+            </h2>
+            <span class="text-white/20 font-bold text-8xl absolute right-0 top-0">04</span>
+        </div>
+
+        <!-- Service Grid - 3 Columns - HIGHLIGHTED DESIGN -->
+        <div class="grid grid-cols-3 gap-6 flex-grow content-start relative z-10">
+            
+            <!-- COLUMN 1: LÂM SÀNG -->
+            <div class="col-span-1 space-y-4">
+                <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white p-4 rounded-xl text-center font-bold uppercase shadow-lg mb-2 flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-white text-brand-main flex items-center justify-center text-xl mb-2 shadow-glow">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    Khối Lâm Sàng
+                </div>
+                
+                <!-- Item Card -->
+                <div class="bg-white text-brand-dark p-4 rounded-xl shadow-lg border-l-8 border-brand-accent transform hover:-translate-y-1 transition duration-300">
+                    <h4 class="font-bold text-base uppercase flex items-center justify-between">
+                        Cấp Cứu 24/7
+                        <i class="fas fa-ambulance text-brand-accent"></i>
+                    </h4>
+                    <p class="text-xs text-gray-600 mt-2 leading-tight">Cấp cứu nội, ngoại khoa, tai nạn. Hệ thống xe cấp cứu trực chiến.</p>
+                </div>
+                <!-- Item Card -->
+                <div class="bg-white text-brand-dark p-4 rounded-xl shadow-lg border-l-8 border-brand-light transform hover:-translate-y-1 transition duration-300">
+                    <h4 class="font-bold text-base uppercase">Sản Phụ Khoa</h4>
+                    <p class="text-xs text-gray-600 mt-2 leading-tight">Khám thai, đỡ sanh, kế hoạch hóa gia đình, tầm soát ung thư.</p>
+                </div>
+                <!-- Item Card -->
+                <div class="bg-white text-brand-dark p-4 rounded-xl shadow-lg border-l-8 border-brand-light transform hover:-translate-y-1 transition duration-300">
+                    <h4 class="font-bold text-base uppercase">Nội Tổng Quát</h4>
+                    <p class="text-xs text-gray-600 mt-2 leading-tight">Tim mạch, hô hấp, tiêu hóa, nội tiết (tiểu đường, bướu cổ).</p>
+                </div>
+                 <!-- Item Card -->
+                 <div class="bg-white text-brand-dark p-4 rounded-xl shadow-lg border-l-8 border-brand-light transform hover:-translate-y-1 transition duration-300">
+                    <h4 class="font-bold text-base uppercase">Khoa Ngoại</h4>
+                    <p class="text-xs text-gray-600 mt-2 leading-tight">Phẫu thuật chấn thương, trĩ, tiểu phẫu u bướu, khâu vết thương.</p>
+                </div>
+                 <!-- Item Card -->
+                 <div class="bg-white text-brand-dark p-4 rounded-xl shadow-lg border-l-8 border-brand-light transform hover:-translate-y-1 transition duration-300">
+                    <h4 class="font-bold text-base uppercase">Nhi Khoa</h4>
+                    <p class="text-xs text-gray-600 mt-2 leading-tight">Khám & điều trị bệnh lý trẻ em, tư vấn dinh dưỡng.</p>
+                </div>
+            </div>
+
+            <!-- COLUMN 2: CHUYÊN KHOA LẺ & YHCT -->
+            <div class="col-span-1 space-y-4 pt-12"> <!-- Offset for visual interest -->
+                 <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white p-4 rounded-xl text-center font-bold uppercase shadow-lg mb-2 flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-white text-brand-main flex items-center justify-center text-xl mb-2 shadow-glow">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    Chuyên Khoa
+                </div>
+
+                <!-- Item Card -->
+                <div class="bg-white/90 backdrop-blur-sm text-brand-dark p-4 rounded-xl shadow-lg border-r-4 border-brand-main hover:bg-white transition duration-300">
+                    <h4 class="font-bold text-sm uppercase">Răng Hàm Mặt</h4>
+                    <p class="text-xs text-gray-600 mt-1">Nha khoa thẩm mỹ, điều trị tủy, nhổ răng, phục hình sứ.</p>
+                </div>
+                <!-- Item Card -->
+                <div class="bg-white/90 backdrop-blur-sm text-brand-dark p-4 rounded-xl shadow-lg border-r-4 border-brand-main hover:bg-white transition duration-300">
+                    <h4 class="font-bold text-sm uppercase">Tai Mũi Họng</h4>
+                    <p class="text-xs text-gray-600 mt-1">Nội soi TMH, điều trị viêm xoang, amidan, thanh quản.</p>
+                </div>
+                <!-- Item Card -->
+                <div class="bg-white/90 backdrop-blur-sm text-brand-dark p-4 rounded-xl shadow-lg border-r-4 border-brand-main hover:bg-white transition duration-300">
+                    <h4 class="font-bold text-sm uppercase">Mắt (Nhãn Khoa)</h4>
+                    <p class="text-xs text-gray-600 mt-1">Đo khúc xạ, điều trị các bệnh lý về mắt, lấy dị vật.</p>
+                </div>
+                 <!-- Item Card -->
+                 <div class="bg-white/90 backdrop-blur-sm text-brand-dark p-4 rounded-xl shadow-lg border-r-4 border-brand-main hover:bg-white transition duration-300">
+                    <h4 class="font-bold text-sm uppercase">Da Liễu</h4>
+                    <p class="text-xs text-gray-600 mt-1">Điều trị các bệnh ngoài da, chăm sóc da thẩm mỹ.</p>
+                </div>
+                 <!-- Item Card -->
+                 <div class="bg-white/90 backdrop-blur-sm text-brand-dark p-4 rounded-xl shadow-lg border-r-4 border-brand-main hover:bg-white transition duration-300">
+                    <h4 class="font-bold text-sm uppercase">YHCT - VLTL</h4>
+                    <p class="text-xs text-gray-600 mt-1">Châm cứu, bấm huyệt, kéo giãn cột sống, siêu âm điều trị.</p>
+                </div>
+            </div>
+
+            <!-- COLUMN 3: CẬN LÂM SÀNG & DỊCH VỤ -->
+            <div class="col-span-1 space-y-4">
+                 <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white p-4 rounded-xl text-center font-bold uppercase shadow-lg mb-2 flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-white text-brand-main flex items-center justify-center text-xl mb-2 shadow-glow">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    Cận Lâm Sàng
+                </div>
+
+                <!-- Item Card -->
+                <div class="bg-white text-brand-dark p-5 rounded-xl shadow-lg border-t-4 border-brand-accent">
+                    <h4 class="font-bold text-lg uppercase mb-2">Chẩn Đoán Hình Ảnh</h4>
+                    <ul class="text-xs text-gray-600 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-brand-light"></i> CT Scanner Đa Lát Cắt</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-brand-light"></i> X-Quang Kỹ Thuật Số</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-brand-light"></i> Siêu âm màu 4D</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-brand-light"></i> Nội soi tiêu hóa</li>
+                    </ul>
+                </div>
+                 <!-- Item Card -->
+                 <div class="bg-white text-brand-dark p-5 rounded-xl shadow-lg border-t-4 border-brand-accent">
+                    <h4 class="font-bold text-lg uppercase mb-2">Xét Nghiệm Tự Động</h4>
+                    <p class="text-xs text-gray-600 mt-1 leading-relaxed">Hệ thống máy xét nghiệm tự động hoàn toàn: Huyết học, Sinh hóa, Miễn dịch, Vi sinh, Ký sinh trùng.</p>
+                </div>
+                
+                <div class="mt-4 pt-2 border-t border-white/20">
+                    <h4 class="font-bold text-white text-center mb-2 uppercase text-sm tracking-wider opacity-80">Dịch Vụ Mở Rộng</h4>
+                    <!-- Item -->
+                    <div class="bg-brand-dark/50 p-3 rounded-lg mb-2 border border-white/10 flex items-center gap-3">
+                        <i class="fas fa-id-card text-brand-yellow"></i>
+                        <p class="text-xs font-bold text-white">Khám BHYT (Thông tuyến)</p>
+                    </div>
+                     <!-- Item -->
+                     <div class="bg-brand-dark/50 p-3 rounded-lg mb-2 border border-white/10 flex items-center gap-3">
+                        <i class="fas fa-city text-brand-yellow"></i>
+                        <p class="text-xs font-bold text-white">Khám Sức Khỏe Doanh Nghiệp</p>
+                    </div>
+                     <!-- Item -->
+                     <div class="bg-brand-dark/50 p-3 rounded-lg border border-white/10 flex items-center gap-3">
+                        <i class="fas fa-car text-brand-yellow"></i>
+                        <p class="text-xs font-bold text-white">Khám Sức Khỏe Lái Xe</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= PAGE 7 (NEW): MEDICAL EQUIPMENT (HIGHLIGHTED SEPARATE PAGE) ================= -->
+    <div class="a4-page page-break relative bg-brand-tech p-0 flex flex-col text-white overflow-hidden">
+        <!-- TECH BACKGROUND -->
+        <div class="absolute inset-0 z-0">
+             <div class="absolute inset-0 bg-gradient-to-br from-brand-tech via-brand-dark to-brand-main opacity-90"></div>
+             <!-- Grid Pattern -->
+             <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(#4dabf7 1px, transparent 1px), linear-gradient(90deg, #4dabf7 1px, transparent 1px); background-size: 40px 40px;"></div>
+             <!-- Glowing Orbs -->
+             <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-light rounded-full mix-blend-screen filter blur-[100px] opacity-20"></div>
+             <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-accent rounded-full mix-blend-screen filter blur-[100px] opacity-10"></div>
+        </div>
+
+        <!-- HEADER -->
+        <div class="relative z-10 px-12 pt-12 pb-6 flex justify-between items-end border-b border-white/10">
+            <div>
+                <p class="text-brand-light font-bold uppercase tracking-[0.3em] text-sm mb-2">Sài Gòn TG Hospital</p>
+                <h2 class="text-4xl font-display font-black leading-tight">HỆ THỐNG<br><span class="text-brand-light">THIẾT BỊ CÔNG NGHỆ CAO</span></h2>
+            </div>
+            <span class="text-white/10 font-black text-8xl leading-none">05</span>
+        </div>
+
+        <!-- MAIN CONTENT AREA -->
+        <div class="relative z-10 flex-grow p-12 pt-6 grid grid-cols-12 gap-8">
+            
+            <!-- LEFT: HERO EQUIPMENT (CT SCANNER) -->
+            <div class="col-span-8 flex flex-col gap-6">
+                <!-- Hero Image Card -->
+                <div class="relative rounded-2xl overflow-hidden border border-white/20 shadow-neon h-[400px] group">
+                    <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="CT Scanner">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-tech to-transparent opacity-80"></div>
+                    
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <div class="inline-block bg-brand-accent px-3 py-1 rounded text-xs font-bold mb-2 uppercase tracking-wider">Công Nghệ Hàng Đầu</div>
+                        <h3 class="text-3xl font-bold mb-2">Hệ Thống CT Scanner Đa Lát Cắt</h3>
+                        <p class="text-gray-300 text-sm max-w-lg">Giúp chẩn đoán chính xác các tổn thương nhỏ nhất, tầm soát ung thư sớm, đột quỵ và các bệnh lý nội tạng phức tạp.</p>
+                    </div>
+
+                    <!-- Tech specs overlay -->
+                    <div class="absolute top-4 right-4 flex flex-col gap-2">
+                        <div class="bg-black/50 backdrop-blur-md px-4 py-2 rounded-lg border border-brand-light/30 text-xs font-mono text-brand-light">
+                            <i class="fas fa-bolt mr-2"></i>Tốc độ chụp nhanh
+                        </div>
+                         <div class="bg-black/50 backdrop-blur-md px-4 py-2 rounded-lg border border-brand-light/30 text-xs font-mono text-brand-light">
+                            <i class="fas fa-bullseye mr-2"></i>Độ phân giải cao
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Equipment Grid -->
+                <div class="grid grid-cols-2 gap-6 h-full">
+                    <!-- Item 1 -->
+                    <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 flex gap-4 items-center hover:bg-white/10 transition">
+                         <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                             <img src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?q=80&w=1964&auto=format&fit=crop" class="w-full h-full object-cover" alt="Xray">
+                         </div>
+                         <div>
+                             <h4 class="font-bold text-lg text-brand-light">X-Quang KTS</h4>
+                             <p class="text-xs text-gray-400 mt-1">Hình ảnh sắc nét, giảm thiểu liều tia X cho bệnh nhân.</p>
+                         </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 flex gap-4 items-center hover:bg-white/10 transition">
+                         <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                             <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Lab">
+                         </div>
+                         <div>
+                             <h4 class="font-bold text-lg text-brand-light">Xét Nghiệm Tự Động</h4>
+                             <p class="text-xs text-gray-400 mt-1">Hệ thống Roche/Abbott cho kết quả nhanh & chính xác.</p>
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: LIST & FEATURES -->
+            <div class="col-span-4 flex flex-col h-full bg-white/5 backdrop-blur-md border-l border-white/10 -my-6 -mr-12 p-8 pt-12">
+                <h3 class="text-xl font-bold uppercase border-b border-brand-accent pb-4 mb-6">Trang Bị Khác</h3>
+                
+                <div class="space-y-6 flex-grow">
+                    <div class="group">
+                        <div class="flex items-center gap-3 mb-2 text-brand-light group-hover:text-white transition">
+                            <i class="fas fa-baby text-2xl"></i>
+                            <h4 class="font-bold text-lg">Siêu Âm Màu 4D</h4>
+                        </div>
+                        <p class="text-xs text-gray-400 pl-9">Tầm soát dị tật thai nhi, siêu âm tim mạch, tuyến giáp.</p>
+                    </div>
+
+                     <div class="group">
+                        <div class="flex items-center gap-3 mb-2 text-brand-light group-hover:text-white transition">
+                            <i class="fas fa-procedures text-2xl"></i>
+                            <h4 class="font-bold text-lg">Nội Soi Tiêu Hóa</h4>
+                        </div>
+                        <p class="text-xs text-gray-400 pl-9">Nội soi dạ dày, đại tràng không đau (gây mê).</p>
+                    </div>
+
+                     <div class="group">
+                        <div class="flex items-center gap-3 mb-2 text-brand-light group-hover:text-white transition">
+                            <i class="fas fa-tooth text-2xl"></i>
+                            <h4 class="font-bold text-lg">Ghế Nha Khoa</h4>
+                        </div>
+                        <p class="text-xs text-gray-400 pl-9">Hệ thống ghế máy hiện đại, vô trùng tuyệt đối.</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-brand-accent p-6 rounded-xl text-center shadow-lg">
+                    <p class="text-xs font-bold uppercase mb-2 text-white/80">Cam kết chất lượng</p>
+                    <p class="font-black text-2xl">100%</p>
+                    <p class="text-xs mt-1">Thiết bị nhập khẩu chính hãng (Mỹ, Nhật, Đức)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= PAGE 8 (NEW): PARTNERS (SEPARATE PAGE) ================= -->
+    <div class="a4-page page-break relative bg-white p-12 flex flex-col">
+        <div class="border-b-2 border-brand-main pb-4 mb-8 flex justify-between items-end">
+            <h2 class="text-3xl font-display font-bold text-brand-dark border-l-8 border-brand-accent pl-4 leading-none">ĐỐI TÁC KHÁCH HÀNG</h2>
+            <span class="text-gray-200 font-bold text-6xl absolute right-12 top-10">06</span>
+        </div>
+
+        <div class="flex-grow flex flex-col justify-center">
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12 text-lg">
+                Sài Gòn TG tự hào là đơn vị y tế được tin chọn bởi <span class="font-bold text-brand-main">hơn 100 doanh nghiệp</span> và hàng ngàn người dân tại khu vực Long An và các vùng lân cận.
             </p>
+
+            <!-- Partners Grid -->
+            <div class="grid grid-cols-3 gap-8 mb-12">
+                <!-- Logo Box 1 -->
+                <div class="aspect-[3/1.5] border border-gray-200 rounded-xl flex items-center justify-center p-8 shadow-sm hover:shadow-md transition bg-gray-50 group">
+                    <div class="text-center">
+                        <p class="font-black text-xl text-gray-400 group-hover:text-brand-dark transition">HOA BINH</p>
+                        <p class="text-[10px] text-gray-400 uppercase tracking-widest">Construction Group</p>
+                    </div>
+                </div>
+                 <!-- Logo Box 2 -->
+                 <div class="aspect-[3/1.5] border border-gray-200 rounded-xl flex items-center justify-center p-8 shadow-sm hover:shadow-md transition bg-gray-50 group">
+                    <div class="text-center">
+                        <p class="font-black text-xl text-gray-400 group-hover:text-brand-dark transition">VIET S CO.</p>
+                        <p class="text-[10px] text-gray-400 uppercase tracking-widest">Manufacturing</p>
+                    </div>
+                </div>
+                 <!-- Logo Box 3 -->
+                 <div class="aspect-[3/1.5] border border-gray-200 rounded-xl flex items-center justify-center p-8 shadow-sm hover:shadow-md transition bg-gray-50 group">
+                    <div class="text-center">
+                        <p class="font-black text-xl text-gray-400 group-hover:text-brand-dark transition">EVER FORCE</p>
+                        <p class="text-[10px] text-gray-400 uppercase tracking-widest">Industrial</p>
+                    </div>
+                </div>
+                 <!-- Logo Box 4 -->
+                 <div class="aspect-[3/1.5] border border-gray-200 rounded-xl flex items-center justify-center p-8 shadow-sm hover:shadow-md transition bg-gray-50 group">
+                    <div class="text-center">
+                        <p class="font-black text-xl text-gray-400 group-hover:text-brand-dark transition">GREEN SPEED</p>
+                        <p class="text-[10px] text-gray-400 uppercase tracking-widest">Logistics</p>
+                    </div>
+                </div>
+                 <!-- Logo Box 5 -->
+                 <div class="aspect-[3/1.5] border border-gray-200 rounded-xl flex items-center justify-center p-8 shadow-sm hover:shadow-md transition bg-gray-50 group">
+                    <div class="text-center">
+                        <p class="font-black text-xl text-gray-400 group-hover:text-brand-dark transition">TECHTRONIC</p>
+                        <p class="text-[10px] text-gray-400 uppercase tracking-widest">Industries</p>
+                    </div>
+                </div>
+                 <!-- Logo Box 6 -->
+                 <div class="aspect-[3/1.5] border border-gray-200 rounded-xl flex items-center justify-center p-8 shadow-sm hover:shadow-md transition bg-gray-50 group">
+                    <div class="text-center">
+                        <p class="font-black text-xl text-gray-400 group-hover:text-brand-dark transition">LIEN MINH</p>
+                        <p class="text-[10px] text-gray-400 uppercase tracking-widest">Group</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Badge -->
+            <div class="bg-brand-bg rounded-2xl p-8 flex items-center justify-between border border-brand-light/30">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 bg-brand-main text-white rounded-full flex items-center justify-center text-3xl shadow-lg">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-brand-dark text-lg uppercase">Hợp Tác Bền Vững</h4>
+                        <p class="text-sm text-gray-600">Chúng tôi cung cấp các gói khám sức khỏe linh hoạt, chiết khấu cao cho doanh nghiệp.</p>
+                    </div>
+                </div>
+                <button class="bg-brand-accent text-white px-6 py-3 rounded font-bold shadow hover:bg-red-700 transition">
+                    Liên Hệ Hợp Tác
+                </button>
+            </div>
         </div>
-        <div class="page-number left text-white">10</div>
     </div>
 
-    <!-- PAGE 11: RIGHT - NATURE DETAILS -->
-    <div class="page bg-white">
-        <div class="h-full grid grid-cols-2 gap-8 p-16">
-            <div class="relative overflow-hidden rounded-sm shadow-lg">
-                <img src="https://images.unsplash.com/photo-1463936575829-25148e1db1b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Leaf Detail">
-            </div>
-            <div class="flex flex-col justify-center">
-                 <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-64 object-cover rounded-sm shadow-lg mb-6" alt="Light and Shadow">
-                 <p class="font-serif italic text-2xl text-brand-dark text-center">"Nắng là lớp trang điểm đẹp nhất của kiến trúc."</p>
-            </div>
-        </div>
-        <div class="page-number right">11</div>
-    </div>
 
-    <!-- PAGE 12: LEFT - MASTER BEDROOM -->
-    <div class="page bg-brand-beige">
-        <div class="h-full flex items-center p-12">
-            <div class="w-1/3 pr-8">
-                <span class="text-brand-gold uppercase tracking-widest text-xs font-bold block mb-4">Private Retreat</span>
-                <h2 class="font-serif text-4xl mb-6 text-brand-dark">Master Bedroom</h2>
-                <p class="text-gray-600 font-light leading-relaxed text-sm">
-                    Sự kết hợp tinh tế giữa vách đầu giường đá xám mạnh mẽ và hệ tủ mây tre đan mềm mại, tạo nên một không gian nghỉ ngơi thư thái tuyệt đối.
-                </p>
-            </div>
-            <div class="w-2/3 h-full relative overflow-hidden rounded-sm shadow-md">
-                <img src="https://images.unsplash.com/photo-1616594039964-40891a909d93?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" class="w-full h-full object-cover" alt="Master Bedroom">
-            </div>
+    <!-- ================= PAGE 9 (Old 8): GALLERY ================= -->
+    <div class="a4-page page-break relative bg-brand-bg p-12">
+        <div class="border-b-2 border-brand-main pb-4 mb-8 flex justify-between items-end">
+            <h2 class="text-3xl font-display font-bold text-brand-dark border-l-8 border-brand-accent pl-4 leading-none">HOẠT ĐỘNG TIÊU BIỂU</h2>
+            <span class="text-gray-200 font-bold text-6xl absolute right-12 top-10">07</span>
         </div>
-        <div class="page-number left">12</div>
-    </div>
 
-    <!-- PAGE 13: RIGHT - PHOEBE'S ROOM -->
-    <div class="page bg-white">
-        <div class="h-full flex flex-row-reverse items-center p-12">
-            <div class="w-1/3 pl-8 text-right">
-                <span class="text-brand-gold uppercase tracking-widest text-xs font-bold block mb-4">Phoebe's Room</span>
-                <h2 class="font-serif text-4xl mb-6 text-brand-dark">Thế Giới Của Bé</h2>
-                <p class="text-gray-600 font-light leading-relaxed text-sm">
-                    Nơi ươm mầm những giấc mơ. Màu sắc tươi sáng, nhẹ nhàng nhưng vẫn giữ được sự hài hòa với ngôn ngữ thiết kế chung.
-                </p>
+        <div class="grid grid-cols-2 gap-4 h-full pb-10">
+            <!-- Large Item -->
+            <div class="col-span-2 h-64 rounded-xl overflow-hidden relative shadow-lg group">
+                <img src="https://plus.unsplash.com/premium_photo-1661281350976-59b9514e5364?q=80&w=2069&auto=format&fit=crop" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="Kham Doan">
+                <div class="absolute bottom-4 left-4 bg-white/95 px-6 py-3 rounded-lg text-brand-dark border-l-4 border-brand-main shadow-lg">
+                    <p class="font-bold text-sm uppercase">Khám Sức Khỏe Doanh Nghiệp Tại Nhà Máy</p>
+                </div>
             </div>
-            <div class="w-2/3 h-full relative overflow-hidden rounded-sm shadow-md">
-                <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" class="w-full h-full object-cover" alt="Kid Room">
-            </div>
-        </div>
-        <div class="page-number right">13</div>
-    </div>
 
-    <!-- PAGE 14: LEFT - FLOOR PLAN -->
-    <div class="page bg-white">
-        <div class="h-full p-16 flex flex-col items-center justify-center border-[12px] border-brand-beige m-8">
-            <h2 class="font-serif text-3xl mb-8">Mặt Bằng Bố Trí</h2>
-            <div class="w-full h-full bg-gray-50 flex items-center justify-center border border-gray-200">
-                <div class="text-center text-gray-400">
-                    <i class="far fa-map text-5xl mb-4"></i>
-                    <p class="font-sans text-sm">PLACEHOLDER FOR 2D FLOOR PLAN IMAGE</p>
-                    <p class="text-xs mt-2">(Vui lòng chèn ảnh bản vẽ kỹ thuật tại đây)</p>
+            <!-- Small Items -->
+            <div class="h-48 rounded-xl overflow-hidden relative shadow-md group">
+                 <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Cap Cuu">
+                  <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition"></div>
+                  <div class="absolute bottom-0 w-full text-white p-3 text-center">
+                    <p class="font-bold text-sm">Cấp cứu 24/7</p>
+                </div>
+            </div>
+            <div class="h-48 rounded-xl overflow-hidden relative shadow-md group">
+                 <img src="https://images.unsplash.com/photo-1584515933487-9bfa05d64463?q=80&w=1949&auto=format&fit=crop" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Kham Benh">
+                  <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition"></div>
+                  <div class="absolute bottom-0 w-full text-white p-3 text-center">
+                    <p class="font-bold text-sm">Tư vấn & Khám bệnh</p>
+                </div>
+            </div>
+            <div class="h-48 rounded-xl overflow-hidden relative shadow-md group">
+                 <img src="https://images.unsplash.com/photo-1516841273335-e39b37888115?q=80&w=1947&auto=format&fit=crop" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Tu thien">
+                  <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition"></div>
+                  <div class="absolute bottom-0 w-full text-white p-3 text-center">
+                    <p class="font-bold text-sm">Hoạt động từ thiện</p>
+                </div>
+            </div>
+            <div class="h-48 rounded-xl overflow-hidden relative shadow-md group">
+                 <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Xray Mobile">
+                  <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition"></div>
+                  <div class="absolute bottom-0 w-full text-white p-3 text-center">
+                    <p class="font-bold text-sm">Xe X-Quang Lưu Động</p>
                 </div>
             </div>
         </div>
-        <div class="page-number left">14</div>
     </div>
 
-    <!-- PAGE 15: RIGHT - CONTACT -->
-    <div class="page bg-brand-dark text-white">
-        <div class="h-full flex items-center justify-center">
-            <div class="text-center">
-                <div class="text-3xl font-serif font-bold tracking-widest mb-12">CÁT VIỆT</div>
-                
-                <div class="grid grid-cols-1 gap-6 text-sm font-light mb-12">
-                    <p><i class="fas fa-phone-alt mr-3 text-brand-gold"></i> 0909 xxx xxx</p>
-                    <p><i class="fas fa-envelope mr-3 text-brand-gold"></i> contact@catviet.com</p>
-                    <p><i class="fas fa-globe mr-3 text-brand-gold"></i> www.catviet.vn</p>
+    <!-- ================= PAGE 10 (Old 9): BACK COVER ================= -->
+    <div class="a4-page page-break relative bg-brand-dark text-white flex flex-col justify-between overflow-hidden">
+        <!-- Decor Circles -->
+        <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[40%] bg-brand-main rounded-full opacity-40 blur-3xl"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[60%] h-[50%] bg-brand-accent rounded-full opacity-20 blur-3xl"></div>
+        
+        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2053&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-10 z-0 mix-blend-overlay" alt="Building">
+
+        <!-- Top Content -->
+        <div class="p-16 relative z-10 text-center mt-20">
+            <h2 class="text-5xl font-display font-black mb-6 tracking-tight">CẢM ƠN QUÝ KHÁCH</h2>
+            <p class="text-xl font-light text-blue-100 max-w-lg mx-auto">Đã tin tưởng và đồng hành cùng Bệnh Viện Sài Gòn TG trong sự nghiệp chăm sóc sức khỏe.</p>
+            <div class="w-24 h-1 bg-brand-accent mx-auto mt-8"></div>
+        </div>
+
+        <!-- Bottom Contact -->
+        <div class="p-16 relative z-10">
+            <div class="bg-white/10 backdrop-blur-md p-10 rounded-2xl border border-white/20 shadow-2xl">
+                <div class="flex items-center gap-6 mb-8 border-b border-white/10 pb-6">
+                    <div class="w-16 h-16 bg-white rounded-xl flex items-center justify-center text-brand-main shadow-lg">
+                        <i class="fas fa-hospital-symbol text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-2xl uppercase tracking-wider text-white">Bệnh Viện Sài Gòn TG</h3>
+                        <p class="text-brand-accent text-sm font-bold tracking-[0.2em] uppercase">Sức khỏe là vàng</p>
+                    </div>
                 </div>
 
-                <div class="w-16 h-px bg-gray-600 mx-auto mb-8"></div>
-                
-                <p class="text-xs text-gray-500 uppercase tracking-widest">Thank you for trusting us</p>
-            </div>
-        </div>
-        <div class="page-number right text-gray-600">15</div>
-    </div>
+                <div class="grid grid-cols-2 gap-8 text-sm">
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-brand-main flex items-center justify-center flex-shrink-0 text-white">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <p class="text-gray-100 mt-1">Ấp Mới 2, Xã Mỹ Hạnh Nam, Huyện Đức Hòa, Tỉnh Long An</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-brand-main flex items-center justify-center flex-shrink-0 text-white">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <p class="text-gray-100 font-bold text-lg">098 9698 115</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-brand-main flex items-center justify-center flex-shrink-0 text-white">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <p class="text-gray-100">benhviensaigontg@gmail.com</p>
+                        </div>
+                         <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-brand-main flex items-center justify-center flex-shrink-0 text-white">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <p class="text-gray-100">www.benhviensaigontg.com.vn</p>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- PAGE 16: BACK COVER -->
-    <div class="page bg-brand-beige">
-        <div class="h-full flex flex-col items-center justify-center p-12 relative">
-            <!-- Center Logo -->
-            <div class="text-center z-10">
-                <div class="text-6xl font-serif font-bold text-brand-dark tracking-widest mb-4">CV</div>
-                <p class="text-sm uppercase tracking-[0.3em] text-brand-gold">Architecture</p>
+                <div class="mt-8 pt-6 border-t border-white/10 flex justify-between items-end">
+                    <div>
+                        <p class="text-xs text-blue-200/60 mb-1">Quét mã để truy cập Website</p>
+                        <p class="text-xs text-white font-bold">Kết nối với chúng tôi</p>
+                    </div>
+                    <div class="w-20 h-20 bg-white p-1 rounded-lg">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://benhviensaigontg.com.vn" alt="QR Code" class="w-full h-full">
+                    </div>
+                </div>
             </div>
-
-            <!-- Bottom Text -->
-            <div class="absolute bottom-12 text-center w-full">
-                <p class="text-xs text-gray-400 uppercase tracking-widest mb-2">Phoebe's House Project</p>
-                <p class="text-[10px] text-gray-300">© 2024 All Rights Reserved</p>
-            </div>
+            
+            <p class="text-center text-[10px] text-gray-500 mt-8 uppercase tracking-widest">© 2024 SAIGON TG HOSPITAL. All Rights Reserved.</p>
         </div>
     </div>
 
