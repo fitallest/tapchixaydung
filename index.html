@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Profile - Cát Việt Architecture (PDF Ready)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+        .page {
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+        }
+        .text-gold { color: #D4AF37; }
+        .bg-gold { background-color: #D4AF37; }
+        .border-gold { border-color: #D4AF37; }
+        
+        /* Chống khoảng trống (Fillers) */
+        .bg-watermark {
+            position: absolute;
+            font-size: 180px;
+            font-weight: 900;
+            color: rgba(0,0,0,0.03);
+            z-index: 0;
+            pointer-events: none;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        @media print {
+            .no-print { display: none; }
+            .page { margin: 0; border: none; }
+        }
+
+        .slant-header { clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%); }
+        .slant-footer { clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%); }
+    </style>
+</head>
+<body>
+
+    <!-- TRANG 1: BÌA (BOLD & ICONIC) -->
+    <section class="page">
+        <div class="absolute inset-0 bg-slate-900">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000" class="w-full h-full object-cover opacity-50" alt="Bìa hồ sơ năng lực">
+        </div>
+        <div class="bg-watermark top-1/2 -translate-y-1/2 -left-20 rotate-90">CAT VIET</div>
+        
+        <div class="relative z-10 flex flex-col justify-between h-full p-16">
+            <div class="flex justify-between items-start">
+                <div class="flex items-center space-x-4">
+                    <div class="w-20 h-20 bg-gold text-white flex items-center justify-center font-black text-3xl">CV</div>
+                    <div class="text-white border-l border-white/20 pl-4">
+                        <h2 class="text-2xl font-black tracking-tighter uppercase">CÁT VIỆT</h2>
+                        <p class="text-[8px] font-bold tracking-[0.4em] text-gold uppercase">Architecture & Construction</p>
+                    </div>
+                </div>
+                <div class="text-white text-[9px] font-bold uppercase tracking-[0.5em] opacity-40">Profile 2024 / V.3</div>
+            </div>
+
+            <div class="mb-20">
+                <h1 class="text-[120px] font-black text-white leading-[0.8] tracking-tighter uppercase italic">
+                    Beyond<br><span class="text-gold">Nature</span>
+                </h1>
+                <p class="text-white/60 mt-12 max-w-sm text-lg font-light border-l-4 border-gold pl-8 leading-relaxed italic">
+                    Kiến tạo không gian sống bền vững thông qua ngôn ngữ kiến trúc đương đại.
+                </p>
+            </div>
+
+            <div class="flex justify-between items-end border-t border-white/10 pt-10">
+                <div class="text-white/20 text-[8px] uppercase tracking-[0.6em]">Premium Build & Design Partner</div>
+                <div class="text-white font-black text-xl italic tracking-widest text-gold">KIENTRUCCATVIET.VN</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANG 2: THƯ NGỎ (CEO PERSPECTIVE) -->
+    <section class="page p-16 bg-slate-50 flex flex-col justify-center">
+        <div class="bg-watermark -bottom-20 -left-10">MESSAGE</div>
+        <div class="grid grid-cols-12 gap-12 items-center relative z-10">
+            <div class="col-span-5 relative">
+                <div class="absolute inset-0 border-4 border-gold translate-x-4 translate-y-4 opacity-10"></div>
+                <!-- CẬP NHẬT ẢNH CEO TẠI ĐÂY -->
+                <img src="https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/600204133_1849275529285308_2394238378346470431_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=1SSs_vAphm8Q7kNvwGYCUMH&_nc_oc=AdmNLCU0ClX1ipFM3eo1xuOKzWlnqU9SQMFg8jkmlPGrDBFVmuHjMD5ovd23qwpAuy0&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=vNPQ4jU8JPpvDNavbKLQsA&oh=00_Afq2kIIvY73bN4zYY0PwuiJhnEY_htZfuSTFYbAQqhJCkQ&oe=697F95ED" class="w-full h-[450px] object-cover shadow-2xl rounded-tr-[80px]" alt="CEO Võ Thành Toni">
+                <div class="absolute -bottom-8 -right-8 bg-slate-900 p-8 shadow-xl">
+                    <p class="text-gold font-black text-4xl italic">CEO</p>
+                </div>
+            </div>
+            <div class="col-span-7">
+                <h2 class="text-gold font-black text-sm uppercase tracking-[0.4em] mb-4 italic">Lời chào từ CEO</h2>
+                <h3 class="text-6xl font-black text-slate-900 leading-none mb-10">Kiến Tạo<br>Bằng Sự Tận Tâm</h3>
+                <div class="space-y-6 text-slate-600 text-justify text-sm leading-relaxed">
+                    <p class="text-slate-900 font-bold italic text-base">"Tại Cát Việt, chúng tôi không xem mỗi công trình là một dự án, mà là một tác phẩm kiến trúc có linh hồn."</p>
+                    <p>Hành trình 5 năm qua là sự nỗ lực không ngừng của đội ngũ KTS và kỹ sư để tìm ra điểm chạm giữa công năng tối ưu và thẩm mỹ tinh tế. Chúng tôi tin rằng, một không gian tốt sẽ thay đổi hoàn toàn chất lượng cuộc sống của con người.</p>
+                    <p>Chúng tôi hy vọng sẽ có cơ hội được đồng hành cùng Quý vị để biến những ý tưởng trên giấy thành những công trình thực tế đầy tự hào.</p>
+                </div>
+                <div class="mt-12">
+                    <p class="text-gold font-black text-4xl italic">Võ Thành Toni</p>
+                    <p class="text-[9px] uppercase font-black text-slate-400 tracking-[0.3em] mt-2">Người sáng lập công ty Cát Việt</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANG 3: VỀ CHÚNG TÔI & LỊCH SỬ -->
+    <section class="page p-16">
+        <div class="flex justify-between items-start mb-20 relative z-10">
+            <h2 class="text-8xl font-black text-slate-900 leading-none italic uppercase">ABOUT<br><span class="text-gold">CATVIET</span></h2>
+            <div class="w-1 h-24 bg-gold"></div>
+        </div>
+        
+        <div class="grid grid-cols-12 gap-10 mb-20 relative z-10">
+            <div class="col-span-6 space-y-6">
+                <p class="text-sm text-slate-700 leading-relaxed text-justify">Được thành lập với định hướng trở thành đơn vị thiết kế thi công hàng đầu tại Cần Thơ, Cát Việt đã xây dựng một hệ sinh thái **Design & Build** hoàn chỉnh, giúp khách hàng tiết kiệm thời gian và tối ưu hóa ngân sách đầu tư.</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-slate-900 p-8 text-white">
+                        <p class="text-4xl font-black text-gold italic">05+</p>
+                        <p class="text-[8px] uppercase font-black mt-2 tracking-widest">Năm hình thành</p>
+                    </div>
+                    <div class="bg-slate-50 p-8 border-b-4 border-gold">
+                        <p class="text-4xl font-black text-slate-900 italic">200+</p>
+                        <p class="text-[8px] uppercase font-black mt-2 tracking-widest text-slate-400">Dự án bàn giao</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-6">
+                <img src="https://images.unsplash.com/photo-1541933224352-262597f59a95?q=80&w=1000" class="w-full h-80 object-cover grayscale" alt="Lịch sử hình thành">
+            </div>
+        </div>
+
+        <div class="relative border-t border-slate-100 pt-12">
+            <div class="bg-watermark -top-20 right-0">HISTORY</div>
+            <div class="grid grid-cols-4 gap-8 text-center">
+                <div>
+                    <p class="text-gold font-black text-2xl mb-2">2018</p>
+                    <p class="text-[10px] font-black uppercase text-slate-900">Khởi tạo</p>
+                    <p class="text-[9px] text-slate-400 mt-2">Thành lập tại Cần Thơ</p>
+                </div>
+                <div>
+                    <p class="text-slate-300 font-black text-2xl mb-2">2021</p>
+                    <p class="text-[10px] font-black uppercase text-slate-900">Bứt phá</p>
+                    <p class="text-[9px] text-slate-400 mt-2">Mở xưởng nội thất hiện đại</p>
+                </div>
+                <div>
+                    <p class="text-slate-300 font-black text-2xl mb-2">2023</p>
+                    <p class="text-[10px] font-black uppercase text-slate-900">Số hóa</p>
+                    <p class="text-[9px] text-slate-400 mt-2">Áp dụng công nghệ BIM</p>
+                </div>
+                <div>
+                    <p class="text-gold font-black text-2xl mb-2">2024</p>
+                    <p class="text-[10px] font-black uppercase text-slate-900">Vươn xa</p>
+                    <p class="text-[9px] text-slate-400 mt-2">Mở rộng quy mô Miền Tây</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANG 4: TẦM NHÌN - SỨ MỆNH - GIÁ TRỊ -->
+    <section class="page bg-slate-900 text-white p-16 flex flex-col justify-center">
+        <div class="bg-watermark -top-20 -left-20">VALUES</div>
+        <div class="text-center mb-24 relative z-10">
+            <h2 class="text-gold font-black text-sm uppercase tracking-[0.5em] mb-4">Core Philosophy</h2>
+            <h3 class="text-6xl font-black italic">Triết Lý & Tầm Nhìn</h3>
+        </div>
+
+        <div class="grid grid-cols-3 gap-8 relative z-10">
+            <div class="p-10 border border-white/10 space-y-8 bg-white/5 hover:bg-gold hover:text-slate-900 transition-all duration-700 group">
+                <div class="w-12 h-12 border border-gold flex items-center justify-center text-gold group-hover:border-slate-900 group-hover:text-slate-900">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </div>
+                <h4 class="text-2xl font-black uppercase italic">Tầm nhìn</h4>
+                <p class="text-xs opacity-50 leading-relaxed text-justify group-hover:opacity-100">Trở thành biểu tượng của sự sáng tạo và uy tín trong ngành kiến trúc xây dựng Miền Tây, mang đến những chuẩn mực mới về không gian sống hiện đại.</p>
+            </div>
+            <div class="p-10 border border-white/10 space-y-8 bg-white/5 hover:bg-gold hover:text-slate-900 transition-all duration-700 group">
+                <div class="w-12 h-12 border border-gold flex items-center justify-center text-gold group-hover:border-slate-900 group-hover:text-slate-900">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h4 class="text-2xl font-black uppercase italic">Sứ mệnh</h4>
+                <p class="text-xs opacity-50 leading-relaxed text-justify group-hover:opacity-100">Cung cấp giải pháp trọn gói thông minh, giúp tối ưu hóa chi phí đầu tư và nâng tầm trải nghiệm sống của từng gia đình thông qua thiết kế cá nhân hóa.</p>
+            </div>
+            <div class="p-10 border border-white/10 space-y-8 bg-white/5 hover:bg-gold hover:text-slate-900 transition-all duration-700 group">
+                <div class="w-12 h-12 border border-gold flex items-center justify-center text-gold group-hover:border-slate-900 group-hover:text-slate-900">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4"></path></svg>
+                </div>
+                <h4 class="text-2xl font-black uppercase italic">Giá trị</h4>
+                <p class="text-xs opacity-50 leading-relaxed text-justify group-hover:opacity-100">**Chính trực - Sáng tạo - Tận tâm** là ba trụ cột giúp Cát Việt giữ vững niềm tin với khách hàng và sự gắn kết chặt chẽ trong đội ngũ.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANG 5: NHÂN SỰ & CƠ CẤU -->
+    <section class="page p-16">
+        <div class="flex justify-between items-end mb-20 relative z-10">
+            <div>
+                <h2 class="text-7xl font-black text-slate-900 leading-[0.8] uppercase italic">ĐỘI NGŨ<br><span class="text-gold">TINH ANH</span></h2>
+            </div>
+            <div class="text-right border-l-4 border-gold pl-6">
+                <p class="text-xs font-black uppercase text-slate-400 tracking-widest mb-2">Human Resources (Nhân sự)</p>
+                <p class="text-sm font-bold text-slate-900 italic">"Con người là nền tảng sáng tạo"</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-12 mb-20 relative z-10">
+            <div class="col-span-4 space-y-6">
+                <div class="flex items-center justify-between border-b-2 border-slate-100 pb-4">
+                    <span class="text-xs font-black uppercase text-slate-500 tracking-widest">Kiến trúc sư</span>
+                    <span class="text-4xl font-black text-gold">05</span>
+                </div>
+                <div class="flex items-center justify-between border-b-2 border-slate-100 pb-4">
+                    <span class="text-xs font-black uppercase text-slate-500 tracking-widest">Designer 3D</span>
+                    <span class="text-4xl font-black text-gold">04</span>
+                </div>
+                <div class="flex items-center justify-between border-b-2 border-slate-100 pb-4">
+                    <span class="text-xs font-black uppercase text-slate-500 tracking-widest">Kỹ sư hiện trường</span>
+                    <span class="text-4xl font-black text-gold">03</span>
+                </div>
+                <div class="flex items-center justify-between border-b-2 border-slate-900 pb-4">
+                    <span class="text-xs font-black uppercase text-slate-900 tracking-widest">Lực lượng thợ</span>
+                    <span class="text-4xl font-black text-slate-900">100+</span>
+                </div>
+            </div>
+            <div class="col-span-8 grid grid-cols-2 gap-4">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600" class="h-64 w-full object-cover grayscale" alt="Nhân sự chuyên môn">
+                <div class="bg-slate-900 p-8 text-white flex flex-col justify-end slant-right">
+                    <h4 class="text-2xl font-black italic uppercase text-gold">CHUYÊN MÔN CAO</h4>
+                    <p class="text-[10px] opacity-40 mt-4 leading-relaxed">Đội ngũ được đào tạo bài bản, am hiểu sâu sắc về kiến trúc đô thị và kỹ thuật xây dựng dân dụng.</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-watermark -bottom-20 right-0">EXPERTISE</div>
+    </section>
+
+    <!-- TRANG 6: DỊCH VỤ - THIẾT KẾ KIẾN TRÚC -->
+    <section class="page p-0 bg-slate-50">
+        <div class="h-2/5 relative slant-header overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200" class="w-full h-full object-cover grayscale" alt="Thiết kế kiến trúc">
+            <div class="absolute inset-0 bg-slate-900/40 flex items-center p-16">
+                <h3 class="text-white text-7xl font-black uppercase italic leading-none">THIẾT KẾ<br>KIẾN TRÚC</h3>
+            </div>
+        </div>
+        <div class="p-16 flex flex-col justify-between flex-grow relative z-10">
+            <div class="grid grid-cols-2 gap-16">
+                <div>
+                    <h4 class="text-gold font-black text-2xl mb-6 italic uppercase">Concept Design</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed text-justify italic mb-6">"Chúng tôi tạo ra những ý tưởng không chỉ để xây dựng, mà để khơi gợi cảm hứng sống."</p>
+                    <div class="p-6 bg-white border-l-4 border-gold shadow-sm text-xs text-slate-500 leading-relaxed">
+                        Nghiên cứu bối cảnh, khí hậu và thói quen sinh hoạt để đưa ra những phương án kiến trúc tối ưu nhất về ánh sáng và gió tự nhiên.
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-gold font-black text-2xl mb-6 italic uppercase">Technical Detail</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed text-justify italic mb-6">"Chính xác đến từng milimet là lời hứa của chúng tôi với chủ đầu tư."</p>
+                    <div class="p-6 bg-white border-l-4 border-gold shadow-sm text-xs text-slate-500 leading-relaxed">
+                        Hồ sơ thiết kế chi tiết (Kết cấu, Điện nước, MEP) được thực hiện bởi các kỹ sư giàu kinh nghiệm, đảm bảo thi công an toàn.
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 flex justify-between items-center text-[9px] font-black uppercase tracking-[0.4em] text-slate-400">
+                <span>International Standards</span>
+                <span>Sustainable Solutions</span>
+                <span>Optimized Costs</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANG 7: DỊCH VỤ - NỘI THẤT & SẢN XUẤT -->
+    <section class="page p-0">
+        <div class="bg-watermark top-1/2 -left-40 -translate-y-1/2 rotate-90 opacity-10">PRODUCTION</div>
+        <div class="p-16 flex flex-col justify-between h-3/5 relative z-10">
+            <div class="mb-10 flex justify-between items-start">
+                <h3 class="text-slate-900 font-black text-7xl uppercase italic leading-none">NỘI THẤT<br>& SẢN XUẤT</h3>
+                <div class="text-right text-gold font-black text-4xl italic">02.</div>
+            </div>
+            <div class="grid grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="text-xl font-black text-slate-800 uppercase italic mb-2">Xưởng nội thất 1000m2</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Xưởng sản xuất của Cát Việt được đầu tư máy móc hiện đại (CNC 4 đầu, máy dán cạnh tự động) giúp gia công đồ gỗ tinh xảo.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-black text-slate-800 uppercase italic mb-2">Vật liệu cao cấp</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Sử dụng 100% gỗ công nghiệp An Cường chính hãng và gỗ tự nhiên chọn lọc, đảm bảo độ bền và tính thẩm mỹ.</p>
+                    </div>
+                </div>
+                <div class="bg-slate-900 p-10 text-white slant-right flex flex-col justify-between">
+                    <p class="text-xs italic opacity-60">"Việc làm chủ quy trình sản xuất giúp chúng tôi kiểm soát 100% chất lượng sản phẩm và tối ưu hóa thời gian."</p>
+                    <div class="mt-10 border-t border-white/20 pt-6 flex justify-between items-baseline">
+                        <span class="text-gold font-black text-3xl italic">PREMIUM</span>
+                        <span class="text-[8px] uppercase font-bold text-white/40">Craftmanship</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="h-2/5 relative slant-footer overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1200" class="w-full h-full object-cover" alt="Sản xuất nội thất">
+            <div class="absolute inset-0 bg-gold/10"></div>
+        </div>
+    </section>
+
+    <!-- TRANG 8: QUY TRÌNH & CÔNG NGHỆ -->
+    <section class="page p-16 bg-slate-50">
+        <div class="flex items-center space-x-6 mb-20 relative z-10">
+            <h2 class="text-5xl font-black text-slate-900 uppercase italic">Workflow (Quy trình)</h2>
+            <div class="h-1 flex-grow bg-gold opacity-50"></div>
+            <p class="text-xs font-black text-gold uppercase tracking-widest italic">Digital Transformation</p>
+        </div>
+
+        <div class="grid grid-cols-12 gap-10 relative z-10">
+            <div class="col-span-8">
+                <div class="space-y-12 relative">
+                    <div class="absolute left-6 top-0 bottom-0 w-1 bg-slate-200"></div>
+                    
+                    <div class="relative pl-16 flex group">
+                        <div class="absolute left-0 w-12 h-12 bg-slate-900 text-gold flex items-center justify-center font-black text-xl italic group-hover:bg-gold group-hover:text-slate-900 transition-all duration-500">01</div>
+                        <div>
+                            <h4 class="text-sm font-black uppercase text-slate-800 italic mb-1 tracking-wider">Khảo sát & Concept 3D</h4>
+                            <p class="text-[10px] text-slate-500 leading-relaxed max-w-sm">Dùng flycam để lấy hiện trạng chính xác tuyệt đối, lên phối cảnh 3D sơ bộ nhanh chóng.</p>
+                        </div>
+                    </div>
+                    <div class="relative pl-16 flex group">
+                        <div class="absolute left-0 w-12 h-12 bg-slate-900 text-gold flex items-center justify-center font-black text-xl italic group-hover:bg-gold group-hover:text-slate-900 transition-all duration-500">02</div>
+                        <div>
+                            <h4 class="text-sm font-black uppercase text-slate-800 italic mb-1 tracking-wider">Trải nghiệm thực tế ảo VR</h4>
+                            <p class="text-[10px] text-slate-500 leading-relaxed max-w-sm">Khách hàng có thể "đi dạo" trong nhà của mình qua kính VR 360 trước khi xây dựng.</p>
+                        </div>
+                    </div>
+                    <div class="relative pl-16 flex group">
+                        <div class="absolute left-0 w-12 h-12 bg-slate-900 text-gold flex items-center justify-center font-black text-xl italic group-hover:bg-gold group-hover:text-slate-900 transition-all duration-500">03</div>
+                        <div>
+                            <h4 class="text-sm font-black uppercase text-slate-800 italic mb-1 tracking-wider">Thi công BIM & Quản lý APP</h4>
+                            <p class="text-[10px] text-slate-500 leading-relaxed max-w-sm">Giám sát tiến độ công trường qua camera và báo cáo hình ảnh thực tế mỗi ngày.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-4 space-y-4">
+                <div class="bg-white p-8 border-t-8 border-gold shadow-md text-center">
+                    <p class="text-[40px] font-black text-slate-900 italic leading-none">99.8%</p>
+                    <p class="text-[9px] font-black uppercase text-slate-400 mt-2">Độ chính xác thiết kế</p>
+                </div>
+                <div class="bg-slate-900 p-8 text-white flex flex-col justify-between">
+                    <p class="text-[10px] font-bold uppercase text-gold mb-6 tracking-widest italic">Technology Stack (Công nghệ)</p>
+                    <div class="space-y-2 text-[10px] font-bold">
+                        <p class="border-b border-white/10 pb-1 uppercase italic">Autodesk Revit (BIM)</p>
+                        <p class="border-b border-white/10 pb-1 uppercase italic">Lumion Rendering</p>
+                        <p class="border-b border-white/10 pb-1 uppercase italic">CNC Integration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-watermark -bottom-20 -left-10">WORKFLOW</div>
+    </section>
+
+    <!-- TRANG 9: DỰ ÁN TIÊU BIỂU -->
+    <section class="page p-16">
+        <div class="mb-12 flex justify-between items-end relative z-10">
+            <div>
+                <h3 class="text-gold font-bold uppercase tracking-[0.3em] text-[10px] mb-2">Projects Gallery (Dự án)</h3>
+                <h2 class="text-6xl font-black text-slate-900 leading-none italic uppercase">DANH MỤC<br>DỰ ÁN</h2>
+            </div>
+            <div class="text-right">
+                <p class="text-xs font-bold text-slate-300 italic">"Chúng tôi tự hào về mỗi mét vuông đã xây dựng"</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-6 h-3/4 relative z-10">
+            <div class="col-span-8 relative overflow-hidden group shadow-2xl">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-1000" alt="Dự án biệt thự">
+                <div class="absolute bottom-10 left-10 text-white p-8 bg-slate-900/90 backdrop-blur-lg border-l-4 border-gold">
+                    <p class="text-gold font-bold uppercase text-[10px] mb-2 tracking-[0.2em]">Villa Series / Can Tho</p>
+                    <h4 class="text-4xl font-black italic">THE NOBLE HOUSE</h4>
+                </div>
+            </div>
+            <div class="col-span-4 grid grid-rows-2 gap-6">
+                <div class="relative overflow-hidden shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000" class="w-full h-full object-cover grayscale" alt="Công trình văn phòng">
+                </div>
+                <div class="bg-slate-50 p-8 flex flex-col justify-center text-slate-900 italic border-r-4 border-gold">
+                    <h4 class="text-5xl font-black mb-2 italic text-gold">200+</h4>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-slate-400">Dự án hoàn thiện tính đến 2024</p>
+                </div>
+            </div>
+            
+            <div class="col-span-12 grid grid-cols-4 gap-4 mt-4">
+                <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=500" class="h-40 w-full object-cover grayscale hover:grayscale-0" alt="Dự án 1">
+                <img src="https://images.unsplash.com/photo-1600566753190-17f0bb2a6c3e?q=80&w=500" class="h-40 w-full object-cover grayscale hover:grayscale-0" alt="Dự án 2">
+                <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=500" class="h-40 w-full object-cover grayscale hover:grayscale-0" alt="Dự án 3">
+                <div class="bg-slate-900 flex items-center justify-center p-6 text-center text-white italic">
+                    <p class="text-[9px] font-bold uppercase tracking-widest">Xem thêm tại<br>kientruccatviet.vn</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANG 10: LIÊN HỆ & CẢM ƠN -->
+    <section class="page bg-slate-900 text-white p-16 flex flex-col justify-between relative">
+        <div class="bg-watermark -right-20 -top-20 opacity-5">CATVIET ARCHITECTURE</div>
+        
+        <div class="relative z-10">
+            <div class="flex items-center space-x-6 mb-20">
+                <div class="w-20 h-20 bg-gold text-white flex items-center justify-center font-black text-3xl">CV</div>
+                <h3 class="text-3xl font-black italic tracking-widest uppercase text-gold">Cát Việt</h3>
+            </div>
+            <h4 class="text-[90px] font-black italic leading-[0.8] uppercase tracking-tighter mb-8">Trân Trọng<br>Cảm Ơn!</h4>
+            <p class="text-xl text-slate-400 font-light max-w-lg leading-relaxed italic border-l-2 border-gold pl-8">"Chúng tôi mong sớm được gặp Quý vị để cùng kiến tạo nên những không gian sống đầy tự hào."</p>
+        </div>
+
+        <div class="relative z-10 grid grid-cols-12 gap-12 border-t border-white/10 pt-16">
+            <div class="col-span-7">
+                <div class="grid grid-cols-2 gap-10">
+                    <div class="space-y-8">
+                        <div>
+                            <p class="text-[10px] font-black uppercase text-gold tracking-[0.4em] mb-4">Contact Detail</p>
+                            <div class="space-y-4">
+                                <div class="flex items-center group">
+                                    <div class="w-8 h-8 bg-white/5 flex items-center justify-center mr-4 text-gold group-hover:bg-gold group-hover:text-slate-900 transition-all duration-500 italic font-black">P</div>
+                                    <span class="text-sm font-bold">0936 396 514</span>
+                                </div>
+                                <div class="flex items-center group">
+                                    <div class="w-8 h-8 bg-white/5 flex items-center justify-center mr-4 text-gold group-hover:bg-gold group-hover:text-slate-900 transition-all duration-500 italic font-black">E</div>
+                                    <span class="text-sm font-bold">vothanhtoni@gmail.com</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-8">
+                        <div>
+                            <p class="text-[10px] font-black uppercase text-gold tracking-[0.4em] mb-4">Office Location</p>
+                            <p class="text-sm font-bold leading-relaxed">117 Trần Việt Châu, P. Cái Khế, Q. Ninh Kiều, TP. Cần Thơ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-5 bg-gold p-10 slant-left text-slate-900 flex flex-col justify-between shadow-2xl">
+                <div>
+                    <p class="text-[10px] font-black uppercase tracking-widest mb-6 border-b border-slate-900/10 pb-2 italic">Digital Connection</p>
+                    <div class="flex flex-col space-y-2">
+                        <span class="font-black italic text-lg hover:translate-x-2 transition-transform cursor-pointer">FACEBOOK / kientruccatviet</span>
+                        <span class="font-black italic text-lg hover:translate-x-2 transition-transform cursor-pointer uppercase">Instagram / catviet.arch</span>
+                        <span class="font-black italic text-lg hover:translate-x-2 transition-transform cursor-pointer">KIENTRUCCATVIET.VN</span>
+                    </div>
+                </div>
+                <div class="mt-10 flex items-center justify-between">
+                    <div class="w-16 h-16 bg-white flex items-center justify-center font-black text-[12px] shadow-inner text-slate-900">QR</div>
+                    <div class="text-right">
+                        <p class="text-[8px] font-black uppercase tracking-tighter">Scan to discover our<br>Online Portfolio</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-[8px] uppercase tracking-[0.5em] opacity-20 text-center mt-12">
+            Cát Việt Architecture & Construction Co., Ltd - All Rights Reserved © 2024
+        </div>
+    </section>
+
+    <!-- NÚT IN (CHỈ HIỂN THỊ TRÊN MÀN HÌNH) -->
+    <div class="fixed bottom-10 right-10 no-print flex space-x-4">
+        <button onclick="window.print()" class="bg-slate-900 text-gold px-12 py-6 rounded-none shadow-2xl hover:bg-white hover:text-slate-900 transition-all duration-500 font-black uppercase tracking-tighter border-2 border-gold">
+            XUẤT PDF NGAY
+        </button>
+    </div>
+
+</body>
+</html>
